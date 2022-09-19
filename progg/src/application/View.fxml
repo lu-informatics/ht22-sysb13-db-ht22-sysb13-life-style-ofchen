@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -21,7 +22,7 @@
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></TextArea>
-                  <Label layoutX="14.0" layoutY="31.0" prefHeight="18.0" prefWidth="50.0" text="Name" underline="true" />
+                  <Label layoutX="14.0" layoutY="34.0" prefHeight="18.0" prefWidth="50.0" text="Name" underline="true" />
                   <Label layoutX="15.0" layoutY="101.0" prefHeight="18.0" prefWidth="65.0" text="Start date" underline="true" />
                   <Label layoutX="14.0" layoutY="67.0" prefHeight="18.0" prefWidth="50.0" text="Address" underline="true" />
                   <Label layoutX="14.0" layoutY="139.0" prefHeight="18.0" prefWidth="50.0" text="Salary" underline="true" />
@@ -35,6 +36,10 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
+                  <TextField fx:id="TextFieldConsultantName" layoutX="77.0" layoutY="21.0" promptText="First name Last name" />
+                  <TextField fx:id="TextFieldConsultantAddress" layoutX="77.0" layoutY="57.0" promptText="City/Street Name/Nbr" />
+                  <TextField fx:id="TextFieldConsultantStartdate" layoutX="77.0" layoutY="88.0" promptText="dd-mm-yy" />
+                  <TextField fx:id="TextFieldSalary" layoutX="77.0" layoutY="126.0" promptText="Enter salary in SEK" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -49,6 +54,7 @@
                   <Label layoutX="14.0" layoutY="37.0" text="Select" underline="true" />
                   <Label layoutX="14.0" layoutY="82.0" text="Select" underline="true" />
                   <Label layoutX="19.0" layoutY="131.0" text="Enter" underline="true" />
+                  <TextField fx:id="TextFieldLogHours" layoutX="86.0" layoutY="128.0" promptText="Enter hours worked..." />
                </children>
             </AnchorPane>
         </content>
@@ -70,7 +76,10 @@
                   <RadioButton fx:id="RadioButtonNotActive" layoutX="442.0" layoutY="156.0" mnemonicParsing="false" text="Not active" />
                   <RadioButton fx:id="RadioButtonActive" layoutX="336.0" layoutY="156.0" mnemonicParsing="false" text="Active" />
                   <Label layoutX="421.0" layoutY="162.0" text="or" />
-                  <ComboBox fx:id="ComboboxProjectManagers" layoutX="72.0" layoutY="133.0" prefWidth="150.0" promptText="Managers" />
+                  <ComboBox fx:id="ComboboxProjectManagers" layoutX="82.0" layoutY="133.0" prefWidth="150.0" promptText="Managers" />
+                  <TextField fx:id="TextFieldProjectName" layoutX="81.0" layoutY="16.0" promptText="Enter project name" />
+                  <TextField fx:id="TextFieldProjectStartDate" layoutX="81.0" layoutY="52.0" promptText="dd-mm-yy" />
+                  <TextField fx:id="TextFieldProjectBudget" layoutX="83.0" layoutY="88.0" promptText="Enter budget in SEK" />
                </children></AnchorPane>
       </content>
     </Tab>
