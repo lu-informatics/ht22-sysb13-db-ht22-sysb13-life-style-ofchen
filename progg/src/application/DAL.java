@@ -66,7 +66,7 @@ public class DAL {
 	// #### ALL METHODS FOR CONSULTANT 
 	
 	// Query for finding a consultant by employee ID
-	public ResultSet getEmpID() throws SQLException {
+	public ResultSet getConsultantEmpID() throws SQLException {
 		Connection con = login();
 		String query = "SELECT EmpID FROM CONSULTANT";
 		PreparedStatement ps = con.prepareStatement(query);
