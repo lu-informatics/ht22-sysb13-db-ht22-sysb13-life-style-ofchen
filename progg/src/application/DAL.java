@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.*;
+import java.util.Random;
+
 
 public class DAL {
 	public Connection login() throws SQLException {
@@ -27,6 +29,8 @@ public class DAL {
 		return null;
 	}
 	
+
+	
 	// #### ALL METHODS FOR TABLE PERSONS
 	
 	public ResultSet getPersons() throws SQLException {
@@ -40,6 +44,7 @@ public class DAL {
 	
 	// #### ALL METHODS FOR PROJECTS
 	
+	// Query for finding a project by project ID
 	public ResultSet getProjectID() throws SQLException {
 		Connection con = login();
 		String query = "SELECT ProjectID FROM PROJECT";
@@ -50,6 +55,7 @@ public class DAL {
 	
 	// #### ALL METHODS FOR CONSULTANT 
 	
+	// Query for finding a consultant by employee ID
 	public ResultSet getEmpID() throws SQLException {
 		Connection con = login();
 		String query = "SELECT EmpID FROM CONSULTANT";
@@ -58,6 +64,29 @@ public class DAL {
 		return projectResult;
 	}
 	
+	// method for generating a consultant ID
+    public static String generateConsultantID() {
+        Random rand = new Random();
+        String id = "C";
+        for (int i = 0; i < 5; i++) {
+            id += rand.nextInt(10);
+        }
+        return id;
+    }
+ 
+    // method for generating a manager ID
+    public static String generateManagerID() {
+    	Random rand = new Random();
+    	String id ="M";
+    	for(int i = 0; i < 5; i++) {
+    		id+= rand.nextInt(10);
+    	}
+    	return id;
+    }
+	
+	// #### ALL METHODS FOR MILESTONES 
+	
+	// Query for viewing milestones
 	public ResultSet viewMilestones() throws SQLException {
 		Connection con = login();
 		String query = "SELECT MilestoneType AS Milestones FROM Milestones";
@@ -65,7 +94,10 @@ public class DAL {
 		ResultSet projectResult = ps.executeQuery();
 		return projectResult;
 	}
+
+	
 		
+	// Query for viewing staffing information for a project. I.e. all consultants currently working on the project and their hours
 	public ResultSet viewStaffOnProject() throws SQLException {
 		Connection con = login();
 		String query = "SELECT c.EmpID, p.ProjectID, c.ConsultantName, Hours  FROM WORK w, CONSULTANT c, PROJECT p WHERE w.EmpID = c.EmpID AND w.ProjectID = p.ProjectID AND w.IsActive = 'true'\r\n"
@@ -74,6 +106,8 @@ public class DAL {
 		ResultSet projectResult = ps.executeQuery();
 		return projectResult;
 	}
+	
+	// Query for finding all consultants who have previously worked on a certain project
 	public ResultSet hasWorked() throws SQLException {
 		Connection con = login();
 		String query = "SELECT c.EmpID, p.ProjectID, c.ConsultantName FROM WORK w, CONSULTANT c, PROJECT p WHERE w.EmpID = c.EmpID AND w.ProjectID = p.ProjectID AND w.IsActive = 'false'";
@@ -82,8 +116,14 @@ public class DAL {
 		return projectResult;
 	}
 	
-	
-	
+	// Show number of hours for a certain consultant on a certain project
+	public ResultSet hoursOnProject() throws SQLException{
+		Connection con = login();
+		String query = "SELECT w.Hours, p.ProjectID, c.EmpID FROM CONSULTANT c,PROJECT p, WORK w WHERE c.EmpID = w.EmpID AND p.ProjectID = w.EmpID";
+		PreparedStatement ps = con.prepareStatement(query);
+		ResultSet projectResult = ps.executeQuery(query);
+		return projectResult;
+	}
 	
 	
 			

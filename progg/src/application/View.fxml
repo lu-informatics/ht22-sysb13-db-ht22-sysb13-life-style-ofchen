@@ -1,11 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.gluonhq.charm.glisten.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
-   <children>
-      <TextArea fx:id="textarea" layoutX="133.0" layoutY="61.0" prefHeight="200.0" prefWidth="367.0" />
-   </children>
-</AnchorPane>
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18">
+  <tabs>
+    <Tab text="Consultant">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="TextFieldConsultantName" floatText="First name Last name" layoutX="79.0" layoutY="13.0" />
+                  <TextField floatText="Enter salary in SEK" layoutX="79.0" layoutY="121.0" />
+                  <TextField fx:id="TextFieldConsultantAddress" floatText="CITY/STREET/HOUSENBR" layoutX="73.0" layoutY="49.0" />
+                  <TextField floatText="yy-mm-dd" layoutX="80.0" layoutY="83.0" />
+                  <RadioButton layoutX="365.0" layoutY="34.0" mnemonicParsing="false" text="Consultant" />
+                  <RadioButton layoutX="365.0" layoutY="70.0" mnemonicParsing="false" text="Project Manager" />
+                  <TextArea layoutX="118.0" layoutY="242.0" prefHeight="85.0" prefWidth="365.0" />
+                  <Label layoutX="14.0" layoutY="31.0" prefHeight="18.0" prefWidth="50.0" text="Name" underline="true" />
+                  <Label layoutX="15.0" layoutY="101.0" prefHeight="18.0" prefWidth="65.0" text="Start date" underline="true" />
+                  <Label layoutX="14.0" layoutY="67.0" prefHeight="18.0" prefWidth="50.0" text="Address" underline="true" />
+                  <Label layoutX="14.0" layoutY="139.0" prefHeight="18.0" prefWidth="50.0" text="Salary" underline="true" />
+                  <Label layoutX="374.0" layoutY="6.0" prefHeight="18.0" prefWidth="111.0" text="Select" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab text="Log">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <ComboBox layoutX="14.0" layoutY="76.0" prefWidth="150.0" promptText="Projects" />
+                  <ComboBox layoutX="14.0" layoutY="33.0" prefWidth="150.0" promptText="Consultants" />
+                  <TextArea layoutX="133.0" layoutY="195.0" prefHeight="122.0" prefWidth="408.0" />
+                  <TextField floatText="Enter hours worked..." layoutX="18.0" layoutY="128.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+    <Tab text="Project">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="TextFieldProjectName" floatText="Project name" layoutX="76.0" layoutY="36.0" />
+                  <TextField floatText="yy-mm-dd" layoutX="76.0" layoutY="72.0" />
+                  <TextField floatText="SEK" layoutX="76.0" layoutY="108.0" />
+                  <Label layoutX="16.0" layoutY="54.0" text="Name " />
+                  <Label layoutX="14.0" layoutY="90.0" text="Start date" />
+                  <Label layoutX="14.0" layoutY="126.0" text="Budget" />
+                  <ComboBox layoutX="372.0" layoutY="86.0" prefWidth="150.0" promptText="Consultants" />
+                  <TextArea layoutX="105.0" layoutY="206.0" prefHeight="116.0" prefWidth="417.0" />
+                  <ComboBox layoutX="372.0" layoutY="50.0" prefWidth="150.0" promptText="Projects" />
+                  <RadioButton layoutX="7.0" layoutY="171.0" mnemonicParsing="false" text="Create project" />
+                  <RadioButton layoutX="378.0" layoutY="171.0" mnemonicParsing="false" text="View project information" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab text="Milestones">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TextField floatText="Milestone..." layoutX="14.0" layoutY="56.0" />
+                  <ComboBox layoutX="10.0" layoutY="29.0" prefWidth="150.0" promptText="Project" />
+                  <TextArea layoutX="87.0" layoutY="197.0" prefHeight="131.0" prefWidth="425.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+  </tabs>
+</TabPane>
