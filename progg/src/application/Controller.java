@@ -15,20 +15,7 @@ public class Controller {
 	
 	@FXML
 	private void initialize() {
-		try {
-			System.out.print("HEJSAN");
-			ResultSet rs = dal.getProjects();
-			
-			System.out.println(dal.getProjects());
-			while(rs.next()) {
-				textarea.setText(rs.getString(1));
-				
-				
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}
 	
 	
