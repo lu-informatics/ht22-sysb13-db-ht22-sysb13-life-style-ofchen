@@ -39,13 +39,52 @@ public class DAL {
 
 	
 	// #### ALL METHODS FOR PROJECTS
-	public ResultSet getProjects() throws SQLException {
+	
+	public ResultSet getProjectID() throws SQLException {
 		Connection con = login();
-		String query = "SELECT * FROM PROJECT";
+		String query = "SELECT ProjectID FROM PROJECT";
 		PreparedStatement ps = con.prepareStatement(query);
 		ResultSet projectResult = ps.executeQuery();
 		return projectResult;
 	}
+	
+	// #### ALL METHODS FOR CONSULTANT 
+	
+	public ResultSet getEmpID() throws SQLException {
+		Connection con = login();
+		String query = "SELECT EmpID FROM CONSULTANT";
+		PreparedStatement ps = con.prepareStatement(query);
+		ResultSet projectResult = ps.executeQuery();
+		return projectResult;
+	}
+	
+	public ResultSet viewMilestones() throws SQLException {
+		Connection con = login();
+		String query = "SELECT MilestoneType AS Milestones FROM Milestones";
+		PreparedStatement ps = con.prepareStatement(query);
+		ResultSet projectResult = ps.executeQuery();
+		return projectResult;
+	}
+		
+	public ResultSet viewStaffOnProject() throws SQLException {
+		Connection con = login();
+		String query = "SELECT c.EmpID, p.ProjectID, c.ConsultantName, Hours  FROM WORK w, CONSULTANT c, PROJECT p WHERE w.EmpID = c.EmpID AND w.ProjectID = p.ProjectID AND w.IsActive = 'true'\r\n"
+				+ "";
+		PreparedStatement ps = con.prepareStatement(query);
+		ResultSet projectResult = ps.executeQuery();
+		return projectResult;
+	}
+	public ResultSet hasWorked() throws SQLException {
+		Connection con = login();
+		String query = "SELECT c.EmpID, p.ProjectID, c.ConsultantName FROM WORK w, CONSULTANT c, PROJECT p WHERE w.EmpID = c.EmpID AND w.ProjectID = p.ProjectID AND w.IsActive = 'false'";
+		PreparedStatement ps = con.prepareStatement(query);
+		ResultSet projectResult = ps.executeQuery();
+		return projectResult;
+	}
+	
+	
+	
+	
 	
 			
 }
