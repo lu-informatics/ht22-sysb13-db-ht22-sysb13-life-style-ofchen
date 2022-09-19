@@ -53,6 +53,16 @@ public class DAL {
 		return projectResult;
 	}
 	
+	// Method for generating a project ID
+	public static String generateProjectID() {
+		Random rand = new Random();
+		String id = "P";
+		for(int i = 0; i < 5; i++) {
+			id += rand.nextInt(10);
+		}
+		return id;
+	}
+	
 	// #### ALL METHODS FOR CONSULTANT 
 	
 	// Query for finding a consultant by employee ID
