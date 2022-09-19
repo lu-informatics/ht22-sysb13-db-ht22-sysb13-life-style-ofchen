@@ -20,7 +20,7 @@ public class Controller {
 	
 	DAL dal = new DAL();
 	
-	/*
+	
 	// TextField -- Consultant 
 	@FXML
 	private TextField TextFieldConsultantName = new TextField();
@@ -30,13 +30,13 @@ public class Controller {
 	private TextField TextFieldConsultantStartdate = new TextField();
 	@FXML
 	private TextField TextFieldSalary = new TextField();
-	*/
+	
 	//TextField -- Log
-	//@FXML
-	//private TextField TextFieldLogHours = new TextField();
+	@FXML
+	private TextField TextFieldLogHours = new TextField();
 	
 	// TextField -- Project 
-	/*@FXML
+	@FXML
 	private TextField TextFieldProjectName = new TextField();
 	@FXML
 	private TextField TextFieldProjectStartDate = new TextField();
@@ -46,7 +46,7 @@ public class Controller {
 	//TextField -- Milestones
 	@FXML
 	private TextField TextFieldMilestonesType = new TextField();
-	*/
+	
 	// RadioButton Consultants 
 	@FXML
 	private RadioButton RadioButtonCreateEmployee = new RadioButton();
@@ -125,6 +125,7 @@ public class Controller {
 	private Tab TabMilestone = new Tab();
 
 
+	// METHOD FOR REFRESHING/FILLING THE CONSULTANT COMBOBOX 
 	public void refreshComboBoxLogConsultants() throws SQLException {
 		ObservableList<String> listConsultants = FXCollections.observableArrayList();
 		
@@ -136,7 +137,18 @@ public class Controller {
 		ComboBoxProjectConsultants.setItems(listConsultants);
 	}
 	
+	// METHOD FOR REFRESHING/FILLING PROJECT COMBOBOX 
 	
+	public void refreshComboBoxLogProjects() throws SQLException {
+		ObservableList<String> listProjects = FXCollections.observableArrayList();
+		
+		ResultSet result = dal.getProjectID();
+		while(result.next()) {
+			listProjects.add(result.getString(1));
+		}
+		ComboBoxProjectProjects.setItems(listProjects);
+		ComboBoxMilestoneProject.setItems(listProjects);
+	}
 		
 	
 	
@@ -149,6 +161,11 @@ public class Controller {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		try {refreshComboBoxLogProjects();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();	
 		}
 	}
 	
