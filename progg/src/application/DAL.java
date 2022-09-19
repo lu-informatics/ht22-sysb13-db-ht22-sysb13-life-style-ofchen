@@ -47,7 +47,7 @@ public class DAL {
 	// Query for finding a project by project ID
 	public ResultSet getProjectID() throws SQLException {
 		Connection con = login();
-		String query = "SELECT ProjectID FROM PROJECT";
+		String query = "SELECT ProjectID FROM dbo.PROJECT";
 		PreparedStatement ps = con.prepareStatement(query);
 		ResultSet projectResult = ps.executeQuery();
 		return projectResult;
