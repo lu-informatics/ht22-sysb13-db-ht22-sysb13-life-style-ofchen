@@ -45,11 +45,11 @@
                   <ComboBox fx:id="ComboBoxLogProjects" layoutX="85.0" layoutY="77.0" prefWidth="150.0" promptText="Projects" />
                   <ComboBox fx:id="ComboBoxLogConsultants" layoutX="85.0" layoutY="32.0" prefWidth="150.0" promptText="Consultants" />
                   <TextArea fx:id="TextAreaLog" layoutX="107.0" layoutY="206.0" prefHeight="122.0" prefWidth="408.0" promptText="Make sure all required fields and boxes are filled in before pressing &quot;Assign time&quot;" />
-                  <RadioButton fx:id="RadioButtonAssignTime" layoutX="411.0" layoutY="171.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="137.0" text="Assign time" />
                   <Label layoutX="14.0" layoutY="37.0" text="Select" underline="true" />
                   <Label layoutX="14.0" layoutY="82.0" text="Select" underline="true" />
                   <Label layoutX="19.0" layoutY="131.0" text="Enter" underline="true" />
                   <TextField fx:id="TextFieldLogHours" layoutX="86.0" layoutY="128.0" promptText="Enter hours worked..." />
+                  <Button fx:id="RadioButtonAssignTime" layoutX="367.0" layoutY="126.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="148.0" text="Assign time " />
                </children>
             </AnchorPane>
         </content>
@@ -86,10 +86,9 @@
                   <TextArea fx:id="TextAreaMilestone" layoutX="87.0" layoutY="197.0" prefHeight="131.0" prefWidth="425.0" />
                   <Label layoutX="6.0" layoutY="32.0" text="1.Enter" />
                   <ComboBox fx:id="ComboBoxMilestoneMilestone" layoutX="389.0" layoutY="28.0" prefWidth="150.0" promptText="Milestones" />
-                  <RadioButton fx:id="RadioButtonAssignMilestone" layoutX="379.0" layoutY="101.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="205.0" text="Assign milestone to project" />
-                  <ComboBox fx:id="ComboBoxMilestoneManager" layoutX="68.0" layoutY="63.0" prefWidth="150.0" promptText="Manager" />
-                  <Label layoutX="4.0" layoutY="68.0" text="2. Select" />
-                  <Label layoutX="5.0" layoutY="107.0" text="3. Press" />
+                  <ComboBox fx:id="ComboBoxMilestoneManager" layoutX="69.0" layoutY="77.0" prefWidth="150.0" promptText="Manager" />
+                  <Label layoutX="4.0" layoutY="81.0" text="2. Select" />
+                  <Label layoutX="3.0" layoutY="162.0" text="3. Press" />
                   <Label layoutX="13.0" layoutY="6.0" prefHeight="18.0" prefWidth="230.0" text="Create Milestone" textFill="#115ad1eb" underline="true">
                      <font>
                         <Font name="System Bold" size="12.0" />
@@ -101,7 +100,9 @@
                      </font>
                   </Label>
                   <TextField fx:id="TextFieldMilestonesType" layoutX="69.0" layoutY="29.0" promptText="Enter milestone type..." />
-                  <Button fx:id="RunButtonCreateMileStone" layoutX="70.0" layoutY="101.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="147.0" text="Create Milestone" />
+                  <Button fx:id="RunButtonCreateMileStone" layoutX="70.0" layoutY="156.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="147.0" text="Create Milestone" />
+                  <TextField fx:id="TextFieldDateOfCompletition" layoutX="68.0" layoutY="109.0" />
+                  <Label layoutX="5.0" layoutY="113.0" text="3. Enter " />
                </children>
             </AnchorPane>
         </content>
