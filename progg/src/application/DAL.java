@@ -8,7 +8,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
-import java.util.Random;
+import java.util.Random; 
 
 
 public class DAL {
@@ -194,7 +194,122 @@ public class DAL {
 		ResultSet projectResult = ps.executeQuery(query);
 		return projectResult;
 	}
-	
+	// #### Metadata 1
+
+		public ResultSetMetaData metadata_1() throws SQLException {
+			Connection con2 = login();
+			String query = "SELECT  p.BusinessEntityID, e.Gender, e.NationalIDNumber, e.LoginID , p.ModifiedDate , p.rowguid "
+					+ "FROM HumanResources.Employee e, Person.BusinessEntity p "
+					+ "WHERE e.BusinessEntityID = p.BusinessEntityID";
+			PreparedStatement ps = con2.prepareStatement(query);
+			ResultSet resultSet = ps.executeQuery();
+			ResultSetMetaData rsmd = resultSet.getMetaData();
+			return rsmd;
+		}
+
+		// #### Metadata 2: All Keys
+
+		public ResultSetMetaData metadata2_AllKeys() throws SQLException {
+			Connection con2 = login();
+			String query = "USE AdventureWorks2019 "
+					+ "	SELECT  pk.CONSTRAINT_NAME AS 'KEYS' "
+					+ "	FROM  INFORMATION_SCHEMA.KEY_COLUMN_USAGE pk "
+					+ "	GROUP BY pk.CONSTRAINT_NAME";
+			PreparedStatement ps = con2.prepareStatement(query);
+			ResultSet resultSet = ps.executeQuery();
+			ResultSetMetaData rsmd = resultSet.getMetaData();
+			return rsmd;
+		}
+		
+		// #### Metadata 2: All table_constraints
+
+		public ResultSetMetaData metadata2_AllTableConstraints() throws SQLException {
+			Connection con2 = login();
+			String query = "SELECT * "
+					+ "FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS";
+			PreparedStatement ps = con2.prepareStatement(query);
+			ResultSet resultSet = ps.executeQuery();
+			ResultSetMetaData rsmd = resultSet.getMetaData();
+			return rsmd;
+		}
+		
+		// #### Metadata 2: 1 - All tables in AdventureWorks2019
+
+		public ResultSetMetaData metadata2_AllTablesInDatabse1()throws SQLException {
+			Connection con2 = login();
+		String query = "SELECT name "
+				+ "FROM AdventureWorks2019.sys.tables";
+		PreparedStatement ps = con2.prepareStatement(query);
+		ResultSet resultSet = ps.executeQuery();
+		ResultSetMetaData rsmd = resultSet.getMetaData();
+		return rsmd;
+		}
+		
+
+		// #### Metadata 2: 2 - All tables in AdventureWorks2019
+
+		public ResultSetMetaData metadata2_AllTablesInDatabse2()throws SQLException {
+			Connection con2 = login();
+		String query = "SELECT TABLE_NAME*TABLE_NAME "
+				+ "FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS";
+		PreparedStatement ps = con2.prepareStatement(query);
+		ResultSet resultSet = ps.executeQuery();
+		ResultSetMetaData rsmd = resultSet.getMetaData();
+		return rsmd;
+		}
+		
+		// #### Metadata 2: 1  All columns in the SalesLT.Customer table
+		
+		public ResultSetMetaData metadata2_AllColumnsInSalesCustomer1() throws SQLException {
+			Connection con2 = login();
+		String query = "SELECT * "
+				+ "FROM Sales.Customer";
+		PreparedStatement ps = con2.prepareStatement(query);
+		ResultSet resultSet = ps.executeQuery();
+		ResultSetMetaData rsmd = resultSet.getMetaData();
+		return rsmd;
+		}
+		
+		// #### Metadata 2: 2  All columns in the SalesLT.Customer table
+		
+		public ResultSetMetaData  metadata2_AllColumnsInSalesCustomer2() throws SQLException {
+			Connection con2 = login();
+		String query =  "SELECT name AS 'Columns' "
+				+ "FROM syscolumns where id=object_id('Sales.Customer')";
+		PreparedStatement ps = con2.prepareStatement(query);
+		ResultSet resultSet = ps.executeQuery();
+		ResultSetMetaData rsmd = resultSet.getMetaData();
+		return rsmd;
+			}
+
+		
+		// #### Metadata 2: The name of the table in the AdventureWorks2019 containing 
+		// #### the highest number of rows 
+		
+		public ResultSetMetaData metadata2_NameOfTableWithHighestNumberOfRows() throws SQLException{
+			Connection con2 = login();
+			String query = "SELECT QUOTENAME(SCHEMA_NAME(sO.schema_id)) + '.' + QUOTENAME(sO.name) AS TableName, sdmvPTNS.row_count "
+					+ "FROM sys.objects as sO"
+					+ "JOIN sys.dm_db_partition_stats AS sdmvPTNS ON sO.object_id = sdmvPTNS.object_id "
+					+ "WHERE sO.type = 'U' /* U = Table */ "
+					+ "AND sO.is_ms_shipped = 0x0 /*Object is createed by an internal SQL Server component with a 0*0 bit*/ "
+					+ "AND sdmvPTNS.index_id < 2 /* INDEX ID of sdmvPTRN, show less than 2*/"
+					+ ""
+					+ "GROUP BY sO.schema_ID, sO.name , sdmvPTNS.row_count "
+					+ "ORDER BY sdmvPTNS.row_count DESC";
+			
+			PreparedStatement ps = con2.prepareStatement(query);
+			ResultSet resultSet = ps.executeQuery();
+			ResultSetMetaData rsmd = resultSet.getMetaData();
+
+			System.out.println("TableName: " + rsmd.getTableName(1));
+			System.out.println("*******************");
+
+			return rsmd;
+		}
+		
+	}
+
 	
 			//hej
 }
