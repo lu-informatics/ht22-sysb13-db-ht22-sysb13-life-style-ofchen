@@ -1,6 +1,7 @@
 package application;
 
 
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
@@ -9,6 +10,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -16,9 +20,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 
-public class Controller {
-	
+public class Controller  {
 	DAL dal = new DAL();
+
+	
+	
+	
+//	RadioButtonConsultant.setToggleGroup(tgConsultant)
 	
 	
 	// TextField -- Consultant 
@@ -49,7 +57,7 @@ public class Controller {
 	
 	// RadioButton Consultants 
 	@FXML
-	private RadioButton RadioButtonCreateEmployee = new RadioButton();
+	private Button ButtonCreateEmployee = new Button();
 	@FXML
 	private RadioButton RadioButtonConsultant = new RadioButton();
 	@FXML
@@ -84,7 +92,7 @@ public class Controller {
 	private ComboBox ComboBoxLogProjects = new ComboBox();
 	
 	// ComboBoxes Project
-	private ComboBox ComboboxProjectManagers = new ComboBox();
+	private ComboBox ComboBoxProjectManagers = new ComboBox();
 	@FXML
 	private ComboBox ComboBoxProjectProjects = new ComboBox();
 	@FXML
@@ -125,6 +133,28 @@ public class Controller {
 	private Tab TabMilestone = new Tab();
 
 
+	public void consultantRunButton() throws SQLException {
+		if(!TextFieldConsultantName.getText().isEmpty()
+			&& !TextFieldConsultantAddress.getText().isEmpty()
+			&& !TextFieldConsultantStartdate.getText().isEmpty()
+			&& !TextFieldSalary.getText().isEmpty()) {
+			boolean check = dal.createEmployee(TextFieldConsultantName.getText(),TextFieldConsultantAddress.getText(),TextFieldConsultantStartdate.getText(),Integer.valueOf(TextFieldSalary.getText()));
+			if(check) {
+				TextAreaConsultant.setText("Employee: " +TextFieldConsultantName.getText() + "\n" + "Adress: " + TextFieldConsultantAddress.getText() + "\n"  + "Startdate: " + TextFieldConsultantStartdate.getText() + "\n"+ "Salary" + TextFieldSalary.getText()+ "\n" + "ManagerId: ");
+				refreshComboBoxLogConsultants();
+			}
+			else {
+				TextAreaConsultant.setText("Something went wrong when calling the DB.");
+			}
+					
+		}
+		else {
+			TextAreaConsultant.setText("Oops something went wrong. Please make sure all requiered fields have been filled in before you press create employee again");
+		}
+		
+	}
+	
+	
 	// METHOD FOR REFRESHING/FILLING THE CONSULTANT COMBOBOX 
 	public void refreshComboBoxLogConsultants() throws SQLException {
 		ObservableList<String> listConsultants = FXCollections.observableArrayList();
@@ -148,24 +178,67 @@ public class Controller {
 		}
 		ComboBoxProjectProjects.setItems(listProjects);
 		ComboBoxMilestoneProject.setItems(listProjects);
-	}
+		ComboBoxLogProjects.setItems(listProjects);	
+		}
 		
+// METHOD FOR FILLING MILESTONES COMBOBOX
+	public void refreshComboBoxMilestoneMilestone() throws SQLException {
+		ObservableList<String> listMilestones = FXCollections.observableArrayList();
+		ResultSet result = dal.viewMilestones();
+		while(result.next()) {
+			listMilestones.add(result.getString(1));
+		}
+		ComboBoxMilestoneMilestone.setItems(listMilestones);
+		}
 	
+	public Controller() throws IOException {
+		   DAL dal = new DAL();
+ }
+	// METHOD FOR FILLING MANAGER COMBOBOXES 
+	public void refreshComboBoxMilestoneManager()throws SQLException {
+		ObservableList<String> listManagers = FXCollections.observableArrayList();
+		ResultSet result = dal.getManagers();
+		while(result.next()) {
+			listManagers.add(result.getString(1));
+		}
+		ComboBoxProjectManagers.setItems(listManagers);
+		ComboBoxMilestoneManager.setItems(listManagers);
+	}
 	
+	/*public void viewConsultantsHasWorked) throws SQLException{
+		ObservableList<String> listEmployeesHasWorked = FXCollections.observableArrayList();
+		Res
+	}
+	*/
 	
+	private ToggleGroup tgConsultant = new ToggleGroup();
 	
 	@FXML
 	private void initialize() {
+		tgConsultant = new ToggleGroup();
+		RadioButtonConsultant.setToggleGroup(tgConsultant);
+		RadioButtonManager.setToggleGroup(tgConsultant);
+		
+		
+		
 		try {
 			refreshComboBoxLogConsultants();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {refreshComboBoxLogProjects();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();	
+		}
+		try {
+			refreshComboBoxMilestoneMilestone();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			refreshComboBoxMilestoneManager();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	
