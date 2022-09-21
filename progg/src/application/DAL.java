@@ -45,74 +45,72 @@ public class DAL {
 	                   + "trustServerCertificate=true"; 
 	   }       
 	
-	   /*
-		public Connection login() throws SQLException {
-	        
-			try {
-				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-				String connectionURL = "jdbc:sqlserver://vmdev001:1433;"
-						+ "database=MainDatabase;"
-						+ "user=Beddan;"
-						+ "password=Madmaxfuryroad9811;"
-						+ "encrypt=true;"
-						+ "trustServerCertificate=true";
-				
-				Connection con = DriverManager.getConnection(connectionURL);
-				return con;
 
-			}
-			catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-			return null;
-		}
-	    */
 	
 	// #### Creating consultants 
-	   public boolean createEmployee(String Name, String Address, String Startdate, int Salary) throws SQLException{
-		  try {
+	   public void createEmployee(String Name, String Address, String Startdate, int Salary) 
+			   throws SQLException {
+		   
 		   String EmpID = generateConsultantID();
-		   String query = "INSERT INTO CONSULTANT VALUES('"
-				   + EmpID + "', '" + Name + "', '" + Address + "', '" + Startdate + "', " + Salary + ", " + null + ") SET NOCOUNT ON";
+		   String query = "INSERT INTO CONSULTANT VALUES(?,?,?,?) SET NOCOUNT ON";
 		   Connection connection = DriverManager.getConnection(connectionURL);
 		   PreparedStatement ps = connection.prepareStatement(query);
-		   return ps.execute();	
+		   ps.setString(1, Name);
+		   ps.setString(2, Address);
+		   ps.setString(3, Startdate);
+		   ps.setInt(4, Salary);
+		   ps.executeUpdate();
+		   ps.close();
+		   connection.close();
 		  }
-	       catch(SQLException e) {
-	    	System.out.print(e.getMessage());   
-	       }
-		  return false;
-	   }
-
+	  
 	   
-	
-	// #### ALL METHODS FOR PROJECTS
+	   // create milestone 
 	   
-	   // Creating projects
-	   public boolean createProject(int Budget, String ProjectName, String ProjectStartdate)throws SQLException{
-		   try {
-			   int ProjectID = generateProjectID();
-			   String query ="INSERT INTO PROJECT VALUES ('"+ ProjectID + "', '" + Budget + "', '" + ProjectName +"', '" + ProjectStartdate + ") SET NOCOUNT ON";
+	   public void createMilestone(String Type, int ProjectID, int dateOfCompletion) 
+			   throws SQLException {
+		  
+			   String query = "INSERT INTO MILESTONES VALUES (?,?,?)";
 			   Connection connection = DriverManager.getConnection(connectionURL);
 			   PreparedStatement ps = connection.prepareStatement(query);
-			   return ps.execute();
+			   ps.setString(1, Type);
+			   ps.setInt(2,ProjectID);
+			   ps.setInt(3, dateOfCompletion);
+			   
+			   ps.executeUpdate();
+			   ps.close();
+			   connection.close();
+					   
 		   }
-		   catch(SQLException e) {
-			   System.out.print(e.getMessage());
-		   }
-		   return false;
+	
+	   
+	   // create projects
+	   public void createProject(int Budget, String ProjectName, String ProjectStartdate)
+			   throws SQLException{
+		   
+			   int ProjectID = generateProjectID();
+			   String query ="INSERT INTO PROJECT VALUES (?,?,?)";
+			   Connection connection = DriverManager.getConnection(connectionURL);
+			   PreparedStatement ps = connection.prepareStatement(query);
+			   ps.setInt(1, Budget);
+			   ps.setString(2, ProjectName);
+			   ps.setString(3, ProjectStartdate);
+			   
+			   ps.executeUpdate();
+			   ps.close();
+			   connection.close();
+			   
 	   }
 	   
-	
-	// Query for finding a project by project ID
-	public ResultSet getProjectID() throws SQLException {
-		String query = "SELECT ProjectID FROM dbo.PROJECT";
+	// View project 
+	  public ResultSet getProject(int ProjectID) throws SQLException {
+		String query = "SELECT ProjectID FROM PROJECT";
 		Connection connection = DriverManager.getConnection(connectionURL);
 		PreparedStatement ps = connection.prepareStatement(query);
+		ps.setInt(1, ProjectID);
 		ResultSet projectResult = ps.executeQuery();
 		return projectResult;
 	}
-
 
 	
 	// Method for generating a project ID
@@ -193,6 +191,13 @@ public class DAL {
 		PreparedStatement ps = connection.prepareStatement(query);
 		ResultSet projectResult = ps.executeQuery(query);
 		return projectResult;
+	}
+
+
+
+	public ResultSet getProjectID() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
