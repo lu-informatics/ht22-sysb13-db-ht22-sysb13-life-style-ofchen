@@ -69,7 +69,7 @@ public class Controller  {
 	
 	// RadioButton Project
 	@FXML
-	private RadioButton RadioButtonCreateProject = new RadioButton();
+	private Button ButtonCreateProject = new Button();
 	@FXML
 	private RadioButton RadioButtonViewProject = new RadioButton();
 	@FXML
@@ -133,27 +133,45 @@ public class Controller  {
 	private Tab TabMilestone = new Tab();
 
 
-	public void consultantRunButton() throws SQLException {
-		if(!TextFieldConsultantName.getText().isEmpty()
-			&& !TextFieldConsultantAddress.getText().isEmpty()
-			&& !TextFieldConsultantStartdate.getText().isEmpty()
-			&& !TextFieldSalary.getText().isEmpty()) {
-			boolean check = dal.createEmployee(TextFieldConsultantName.getText(),TextFieldConsultantAddress.getText(),TextFieldConsultantStartdate.getText(),Integer.valueOf(TextFieldSalary.getText()));
-			if(check) {
-				TextAreaConsultant.setText("Employee: " +TextFieldConsultantName.getText() + "\n" + "Adress: " + TextFieldConsultantAddress.getText() + "\n"  + "Startdate: " + TextFieldConsultantStartdate.getText() + "\n"+ "Salary" + TextFieldSalary.getText()+ "\n" + "ManagerId: ");
-				refreshComboBoxLogConsultants();
-			}
-			else {
-				TextAreaConsultant.setText("Something went wrong when calling the DB.");
-			}
-					
-		}
-		else {
+	public void createEmployeeRunButton() throws SQLException {
+		if(TextFieldConsultantName.getText().isEmpty()
+				|| TextFieldConsultantAddress.getText().isEmpty()
+				|| TextFieldConsultantStartdate.getText().isEmpty()
+				|| TextFieldSalary.getText().isEmpty()) {
+			
 			TextAreaConsultant.setText("Oops something went wrong. Please make sure all requiered fields have been filled in before you press create employee again");
 		}
+		else {
+			boolean check = dal.createEmployee(TextFieldConsultantName.getText(),TextFieldConsultantAddress.getText(),TextFieldConsultantStartdate.getText(),
+					Integer.valueOf(TextFieldSalary.getText()));
+					TextAreaConsultant.setText("You have created employee" + "Employee: " +TextFieldConsultantName.getText() + "\n" + "Adress: " + TextFieldConsultantAddress.getText() +
+							"\n"  + "Startdate: " + TextFieldConsultantStartdate.getText() + "\n"+ "Salary" + TextFieldSalary.getText()+ "\n" + "ManagerId: ");
+					refreshComboBoxLogConsultants();
+		}
+	}
+	//}
+	// 
+	public void projectRunButton() throws SQLException {
+				if(TextFieldProjectName.getText().isEmpty()
+				|| TextFieldProjectStartDate.getText().isEmpty()
+				|| TextFieldProjectBudget.getText().isEmpty()) {
+			boolean check = dal.createProject(Integer.valueOf(TextFieldProjectBudget.getText()), TextFieldProjectName.getText(), 
+							TextFieldProjectStartDate.getText());
+			if(check){
+			TextAreaProject.setText("The project: " + TextFieldProjectName.getText() + " was created"+  "\n" + "Startdate of project is: " + 
+					TextFieldProjectStartDate.getText() + "\n" + "Budget set: " + TextFieldProjectBudget.getText());
+			refreshComboBoxLogProjects();
+			}
+			else {
+				TextAreaConsultant.setText("Something went wrong in thge database");
+			}
+		}
+		else {
+			TextAreaConsultant.setText("Your action yielded no result. Please make sure all requiered fields have been filled in before you press create employee again");
+			}
 		
 	}
-	
+
 	
 	// METHOD FOR REFRESHING/FILLING THE CONSULTANT COMBOBOX 
 	public void refreshComboBoxLogConsultants() throws SQLException {
