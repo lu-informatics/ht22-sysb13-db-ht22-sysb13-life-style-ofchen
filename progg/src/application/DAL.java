@@ -17,12 +17,13 @@ public class DAL {
 	   
 	   public DAL() throws IOException { 
 		 
-		   System.out.println("DB server name: " +System.getenv("DATABASE_SERVER_NAME"));
+		/*   System.out.println("DB server name: " +System.getenv("DATABASE_SERVER_NAME"));
 		   System.out.println("port: " + System.getenv("DATABASE_SERVER_PORT"));
 		   System.out.println("DB namn: " + System.getenv("DATABASE_NAME") );
 		   System.out.println("DB User name: " + System.getenv("DATABASE_USER_NAME"));
 		   System.out.println("DB User Password: " + System.getenv("DATABASE_USER_PASSWORD") );
 		   
+		   */
 	   
 	   String databaseServerName = System.getenv("DATABASE_SERVER_NAME"); 
 	   String databaseServerPort = System.getenv("DATABASE_SERVER_PORT");
@@ -67,13 +68,12 @@ public class DAL {
 		}
 	    */
 	
-	// #### ALL METHODS FOR INSERTING INTO TABLE 
+	// #### Creating consultants 
 	   public boolean createEmployee(String Name, String Address, String Startdate, int Salary) throws SQLException{
 		  try {
 		   String EmpID = generateConsultantID();
 		   String query = "INSERT INTO CONSULTANT VALUES('"
 				   + EmpID + "', '" + Name + "', '" + Address + "', '" + Startdate + "', " + Salary + ", " + null + ") SET NOCOUNT ON";
-		   //String query = "INSERT INTO CONSULTANT VALUES(""'" + EmpID + "'," + "'" + Name + "'," + "'" + Address + "'," + "'" Startdate+ +Salary+)";
 		   Connection connection = DriverManager.getConnection(connectionURL);
 		   PreparedStatement ps = connection.prepareStatement(query);
 		   return ps.execute();	
@@ -83,11 +83,26 @@ public class DAL {
 	       }
 		  return false;
 	   }
-	
-	   
 
+	   
 	
 	// #### ALL METHODS FOR PROJECTS
+	   
+	   // Creating projects
+	   public boolean createProject(int Budget, String ProjectName, String ProjectStartdate)throws SQLException{
+		   try {
+			   int ProjectID = generateProjectID();
+			   String query ="INSERT INTO PROJECT VALUES ('"+ ProjectID + "', '" + Budget + "', '" + ProjectName +"', '" + ProjectStartdate + ") SET NOCOUNT ON";
+			   Connection connection = DriverManager.getConnection(connectionURL);
+			   PreparedStatement ps = connection.prepareStatement(query);
+			   return ps.execute();
+		   }
+		   catch(SQLException e) {
+			   System.out.print(e.getMessage());
+		   }
+		   return false;
+	   }
+	   
 	
 	// Query for finding a project by project ID
 	public ResultSet getProjectID() throws SQLException {
@@ -101,9 +116,9 @@ public class DAL {
 
 	
 	// Method for generating a project ID
-	public static String generateProjectID() {
+	public static int generateProjectID() {
 		Random rand = new Random();
-		String id = "P";
+		int id = 0;
 		for(int i = 0; i < 5; i++) {
 			id += rand.nextInt(10);
 		}

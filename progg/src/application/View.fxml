@@ -64,7 +64,6 @@
                   <ComboBox fx:id="ComboBoxProjectConsultants" layoutX="411.0" layoutY="52.0" prefWidth="150.0" promptText="Consultants" />
                   <TextArea fx:id="TextAreaProject" layoutX="101.0" layoutY="212.0" prefHeight="116.0" prefWidth="417.0" promptText="Please make sure you have entered and/or selected relevant textfields for your prupose" />
                   <ComboBox fx:id="ComboBoxProjectProjects" layoutX="411.0" layoutY="16.0" prefWidth="150.0" promptText="Projects" />
-                  <RadioButton fx:id="RadioButtonCreateProject" layoutX="12.0" layoutY="171.0" mnemonicParsing="false" text="Create project" />
                   <RadioButton fx:id="RadioButtonViewProject" layoutX="336.0" layoutY="85.0" mnemonicParsing="false" text="View project information" />
                   <Label layoutX="14.0" layoutY="137.0" text="Manager" />
                   <RadioButton fx:id="RadioButtonAssignConsultant" layoutX="336.0" layoutY="122.0" mnemonicParsing="false" text="Assign consultant to project" />
@@ -75,6 +74,7 @@
                   <TextField fx:id="TextFieldProjectName" layoutX="81.0" layoutY="16.0" promptText="Enter project name" />
                   <TextField fx:id="TextFieldProjectStartDate" layoutX="81.0" layoutY="52.0" promptText="dd-mm-yy" />
                   <TextField fx:id="TextFieldProjectBudget" layoutX="83.0" layoutY="88.0" promptText="Enter budget in SEK" />
+                  <Button fx:id="ButtonCreateProject" layoutX="70.0" layoutY="174.0" mnemonicParsing="false" onAction="#projectRunButton" prefHeight="30.0" prefWidth="184.0" text="Create project" />
                </children></AnchorPane>
       </content>
     </Tab>
