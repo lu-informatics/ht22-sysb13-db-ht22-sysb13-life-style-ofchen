@@ -68,19 +68,20 @@ public class DAL {
 	    */
 	
 	// #### ALL METHODS FOR INSERTING INTO TABLE 
-	   public ResultSet createEmployee(String Name, String Address, String Startdate, int Salary) throws SQLException{
+	   public boolean createEmployee(String Name, String Address, String Startdate, int Salary) throws SQLException{
 		  try {
 		   String EmpID = generateConsultantID();
-		   String query ="INSERT INTO CONSULTANT VALUES("+EmpID+"," + Name+","+Address+","+Startdate+","+Salary+",)";
+		   String query = "INSERT INTO CONSULTANT VALUES('"
+				   + EmpID + "', '" + Name + "', '" + Address + "', '" + Startdate + "', " + Salary + ", " + null + ") SET NOCOUNT ON";
+		   //String query = "INSERT INTO CONSULTANT VALUES(""'" + EmpID + "'," + "'" + Name + "'," + "'" + Address + "'," + "'" Startdate+ +Salary+)";
 		   Connection connection = DriverManager.getConnection(connectionURL);
 		   PreparedStatement ps = connection.prepareStatement(query);
-		   ResultSet projectResult = ps.executeQuery();
-	       return projectResult;	
+		   return ps.execute();	
 		  }
 	       catch(SQLException e) {
 	    	System.out.print(e.getMessage());   
 	       }
-		  return null;
+		  return false;
 	   }
 	
 	   
@@ -96,6 +97,8 @@ public class DAL {
 		ResultSet projectResult = ps.executeQuery();
 		return projectResult;
 	}
+
+
 	
 	// Method for generating a project ID
 	public static String generateProjectID() {

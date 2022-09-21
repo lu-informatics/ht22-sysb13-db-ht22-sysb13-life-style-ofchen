@@ -138,14 +138,22 @@ public class Controller  {
 			&& !TextFieldConsultantAddress.getText().isEmpty()
 			&& !TextFieldConsultantStartdate.getText().isEmpty()
 			&& !TextFieldSalary.getText().isEmpty()) {
-			dal.createEmployee(TextFieldConsultantName.getText(),TextFieldConsultantAddress.getText(),TextFieldConsultantStartdate.getText(),Integer.valueOf(TextFieldSalary.getText()));
-			TextAreaConsultant.setText("Employee: " +TextFieldConsultantName.getText() + "\n" + "Adress: " + TextFieldConsultantAddress.getText() + "\n"  + "Startdate: " + TextFieldConsultantStartdate.getText() + "\n"+ "Salary" + TextFieldSalary.getText()+ "\n" + "ManagerId: ");
+			boolean check = dal.createEmployee(TextFieldConsultantName.getText(),TextFieldConsultantAddress.getText(),TextFieldConsultantStartdate.getText(),Integer.valueOf(TextFieldSalary.getText()));
+			if(check) {
+				TextAreaConsultant.setText("Employee: " +TextFieldConsultantName.getText() + "\n" + "Adress: " + TextFieldConsultantAddress.getText() + "\n"  + "Startdate: " + TextFieldConsultantStartdate.getText() + "\n"+ "Salary" + TextFieldSalary.getText()+ "\n" + "ManagerId: ");
+				refreshComboBoxLogConsultants();
+			}
+			else {
+				TextAreaConsultant.setText("Something went wrong when calling the DB.");
+			}
+					
 		}
 		else {
 			TextAreaConsultant.setText("Oops something went wrong. Please make sure all requiered fields have been filled in before you press create employee again");
 		}
 		
 	}
+	
 	
 	// METHOD FOR REFRESHING/FILLING THE CONSULTANT COMBOBOX 
 	public void refreshComboBoxLogConsultants() throws SQLException {
