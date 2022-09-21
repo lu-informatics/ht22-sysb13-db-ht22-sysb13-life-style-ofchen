@@ -34,7 +34,7 @@
                   <TextField fx:id="TextFieldConsultantAddress" layoutX="77.0" layoutY="57.0" promptText="City/Street Name/Nbr" />
                   <TextField fx:id="TextFieldConsultantStartdate" layoutX="77.0" layoutY="88.0" promptText="dd-mm-yy" />
                   <TextField fx:id="TextFieldSalary" layoutX="77.0" layoutY="126.0" promptText="Enter salary in SEK" />
-                  <Button fx:id="ButtonCreateEmployee" layoutX="88.0" layoutY="180.0" mnemonicParsing="false" onAction="#consultantRunButton" prefHeight="30.0" prefWidth="130.0" text="Create Employee" />
+                  <Button fx:id="ButtonCreateEmployee" layoutX="88.0" layoutY="180.0" mnemonicParsing="false" onAction="#createEmployeeRunButton" prefHeight="30.0" prefWidth="130.0" text="Create Employee" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -85,7 +85,6 @@
                   <ComboBox fx:id="ComboBoxMilestoneProject" layoutX="389.0" layoutY="64.0" prefWidth="150.0" promptText="Projects" />
                   <TextArea fx:id="TextAreaMilestone" layoutX="87.0" layoutY="197.0" prefHeight="131.0" prefWidth="425.0" />
                   <Label layoutX="6.0" layoutY="32.0" text="1.Enter" />
-                  <RadioButton fx:id="RadioButtonCreateMileStone" layoutX="68.0" layoutY="101.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Create Milestone" />
                   <ComboBox fx:id="ComboBoxMilestoneMilestone" layoutX="389.0" layoutY="28.0" prefWidth="150.0" promptText="Milestones" />
                   <RadioButton fx:id="RadioButtonAssignMilestone" layoutX="379.0" layoutY="101.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="205.0" text="Assign milestone to project" />
                   <ComboBox fx:id="ComboBoxMilestoneManager" layoutX="68.0" layoutY="63.0" prefWidth="150.0" promptText="Manager" />
@@ -102,6 +101,7 @@
                      </font>
                   </Label>
                   <TextField fx:id="TextFieldMilestonesType" layoutX="69.0" layoutY="29.0" promptText="Enter milestone type..." />
+                  <Button fx:id="RunButtonCreateMileStone" layoutX="70.0" layoutY="101.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="147.0" text="Create Milestone" />
                </children>
             </AnchorPane>
         </content>
