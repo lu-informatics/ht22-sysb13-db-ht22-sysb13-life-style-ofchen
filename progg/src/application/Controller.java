@@ -81,7 +81,7 @@ public class Controller  {
 	
 	// RadioButton Milestones
 	@FXML
-	private RadioButton RadioButtonCreateMileStone = new RadioButton();
+	private RadioButton RunButtonCreateMileStone = new RadioButton();
 	@FXML
 	private RadioButton RadioButtonAssignMilestone = new RadioButton();
 	
@@ -132,7 +132,7 @@ public class Controller  {
 	@FXML
 	private Tab TabMilestone = new Tab();
 
-
+		// Creating an employee 
 	public void createEmployeeRunButton() throws SQLException {
 		if(TextFieldConsultantName.getText().isEmpty()
 				|| TextFieldConsultantAddress.getText().isEmpty()
@@ -140,35 +140,31 @@ public class Controller  {
 				|| TextFieldSalary.getText().isEmpty()) {
 			
 			TextAreaConsultant.setText("Oops something went wrong. Please make sure all requiered fields have been filled in before you press create employee again");
-		}
+		}		
 		else {
 			boolean check = dal.createEmployee(TextFieldConsultantName.getText(),TextFieldConsultantAddress.getText(),TextFieldConsultantStartdate.getText(),
 					Integer.valueOf(TextFieldSalary.getText()));
 					TextAreaConsultant.setText("You have created employee" + "Employee: " +TextFieldConsultantName.getText() + "\n" + "Adress: " + TextFieldConsultantAddress.getText() +
 							"\n"  + "Startdate: " + TextFieldConsultantStartdate.getText() + "\n"+ "Salary" + TextFieldSalary.getText()+ "\n" + "ManagerId: ");
 					refreshComboBoxLogConsultants();
-		}
+		}		
 	}
-	//}
-	// 
+		// creating a project 
 	public void projectRunButton() throws SQLException {
 				if(TextFieldProjectName.getText().isEmpty()
 				|| TextFieldProjectStartDate.getText().isEmpty()
 				|| TextFieldProjectBudget.getText().isEmpty()) {
-			boolean check = dal.createProject(Integer.valueOf(TextFieldProjectBudget.getText()), TextFieldProjectName.getText(), 
-							TextFieldProjectStartDate.getText());
+				
+				TextAreaConsultant.setText("Something went wrong in thge database. Make sure you have entered required fields");
+				}
+				else {		
+			boolean check = dal.createProject(Integer.valueOf(TextFieldProjectBudget.getText()), TextFieldProjectName.getText(), TextFieldProjectStartDate.getText());
 			if(check){
 			TextAreaProject.setText("The project: " + TextFieldProjectName.getText() + " was created"+  "\n" + "Startdate of project is: " + 
 					TextFieldProjectStartDate.getText() + "\n" + "Budget set: " + TextFieldProjectBudget.getText());
 			refreshComboBoxLogProjects();
 			}
-			else {
-				TextAreaConsultant.setText("Something went wrong in thge database");
-			}
 		}
-		else {
-			TextAreaConsultant.setText("Your action yielded no result. Please make sure all requiered fields have been filled in before you press create employee again");
-			}
 		
 	}
 
