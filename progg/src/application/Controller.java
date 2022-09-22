@@ -23,7 +23,9 @@ import javafx.fxml.FXML;
 public class Controller  {
 	DAL dal = new DAL();
 
-	
+	public Controller() throws IOException {
+		   DAL dal = new DAL();
+}
 	
 	
 //	RadioButtonConsultant.setToggleGroup(tgConsultant)
@@ -134,7 +136,7 @@ public class Controller  {
 	@FXML
 	private Tab TabMilestone = new Tab();
 
-		// Creating an employee 
+		// Registration of an employee 
 	public void createEmployeeRunButton() throws SQLException {
 		if(TextFieldConsultantName.getText().isEmpty()
 				|| TextFieldConsultantAddress.getText().isEmpty()
@@ -146,22 +148,22 @@ public class Controller  {
 		//else {
 	
 	}
-		// creating a project 
+		// Registration of a project 
 	public void projectRunButton() throws SQLException {
 				if(TextFieldProjectName.getText().isEmpty()
 				|| TextFieldProjectStartDate.getText().isEmpty()
 				|| TextFieldProjectBudget.getText().isEmpty()) {
 				
 				TextAreaConsultant.setText("Something went wrong in the database. Make sure you have entered required fields");
-				}
 		}
+	}
 				//else {		
 			
 		
 // dal.createProject(Integer.valueOf(TextFieldProjectBudget.getText()), TextFieldProjectName.getText(), TextFieldProjectStartDate.getText());
 //	if(check){
 	
-	 	// creating milestones
+	 	// Registration of a milestones
 	public void milestoneRunButton() throws SQLException {
 				if (!TextFieldMilestonesType.getText().isEmpty()
 					||ComboBoxMilestoneManager.getSelectionModel().getSelectedItem() != null)
@@ -187,10 +189,9 @@ public class Controller  {
 	
 	// METHOD FOR REFRESHING/FILLING PROJECT COMBOBOX 
 	
-	public void refreshComboBoxLogProjects() throws SQLException {
+	/* public void refreshComboBoxLogProjects() throws SQLException {
 		ObservableList<String> listProjects = FXCollections.observableArrayList();
-		
-		ResultSet result = dal.getProjectID();
+		ResultSet result = Integer.valueOf(dal.generateProjectID());
 		while(result.next()) {
 			listProjects.add(result.getString(1));
 		}
@@ -198,20 +199,20 @@ public class Controller  {
 		ComboBoxMilestoneProject.setItems(listProjects);
 		ComboBoxLogProjects.setItems(listProjects);	
 		}
+*/
+
 		
-// METHOD FOR FILLING MILESTONES COMBOBOX
+// METHOD FOR FILLING MILESTONES COMBOBOX -- FUNKAR
 	public void refreshComboBoxMilestoneMilestone() throws SQLException {
 		ObservableList<String> listMilestones = FXCollections.observableArrayList();
 		ResultSet result = dal.viewMilestones();
 		while(result.next()) {
 			listMilestones.add(result.getString(1));
 		}
-		ComboBoxMilestoneMilestone.setItems(listMilestones);
+			ComboBoxMilestoneMilestone.setItems(listMilestones);
 		}
 	
-	public Controller() throws IOException {
-		   DAL dal = new DAL();
- }
+	
 	// METHOD FOR FILLING MANAGER COMBOBOXES 
 	public void refreshComboBoxMilestoneManager()throws SQLException {
 		ObservableList<String> listManagers = FXCollections.observableArrayList();
@@ -220,7 +221,6 @@ public class Controller  {
 			listManagers.add(result.getString(1));
 		}
 		ComboBoxProjectManagers.setItems(listManagers);
-		ComboBoxMilestoneManager.setItems(listManagers);
 	}
 	
 	/*public void viewConsultantsHasWorked) throws SQLException{
@@ -229,36 +229,21 @@ public class Controller  {
 	}
 	*/
 	
-	private ToggleGroup tgConsultant = new ToggleGroup();
+	//private ToggleGroup tgConsultant = new ToggleGroup();
 	
 	@FXML
-	private void initialize() {
-		tgConsultant = new ToggleGroup();
-		RadioButtonConsultant.setToggleGroup(tgConsultant);
-		RadioButtonManager.setToggleGroup(tgConsultant);
-		
-		
-		
-		try {
-			refreshComboBoxLogConsultants();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		try {refreshComboBoxLogProjects();
-		} catch (SQLException e) {
-			e.printStackTrace();	
-		}
+	private void initialize() {	
 		try {
 			refreshComboBoxMilestoneMilestone();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		try {
 			refreshComboBoxMilestoneManager();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
 }
+	
