@@ -14,7 +14,8 @@ import java.util.Random;
 public class DAL {
 	
 	   private String connectionURL;
-	   
+	   private String connectionURL2;
+	
 	   public DAL() throws IOException { 
 		 
 		/*   System.out.println("DB server name: " +System.getenv("DATABASE_SERVER_NAME"));
@@ -24,6 +25,25 @@ public class DAL {
 		   System.out.println("DB User Password: " + System.getenv("DATABASE_USER_PASSWORD") );
 		   
 		   */
+		   
+	   String metadataServerName = System.getenv("METADATA_SERVER_NAME"); 
+	   String metadataServerPort = System.getenv("METADATA_SERVER_PORT");
+	   String metadataName = System.getenv("METADATA_NAME");
+	   String metadataUserName = System.getenv("METADATA_USER_NAME");
+	   String metadataUserPassword = System.getenv("METADATA_USER_PASSWORD"); 
+	   
+	   
+	   connectionURL2 = "jdbc:sqlserver://"
+               + metadataServerName 
+               + ":"
+               + metadataServerPort + ";"
+               + "database=" + metadataName + ";"
+               + "user=" + metadataUserName + ";"
+               + "password=" + metadataUserPassword + ";"
+               + "encrypt=true;" 
+               + "trustServerCertificate=true"; 
+	   
+	   
 	   
 	   String databaseServerName = System.getenv("DATABASE_SERVER_NAME"); 
 	   String databaseServerPort = System.getenv("DATABASE_SERVER_PORT");
@@ -193,11 +213,11 @@ public class DAL {
 		return projectResult;
 	}
 	
-	/*
+	
 	// #### Metadata 1
 
 		public ResultSetMetaData metadata_1() throws SQLException {
-			Connection con2 = login();
+			Connection con2 = DriverManager.getConnection(connectionURL2);
 			String query = "SELECT  p.BusinessEntityID, e.Gender, e.NationalIDNumber, e.LoginID , p.ModifiedDate , p.rowguid "
 					+ "FROM HumanResources.Employee e, Person.BusinessEntity p "
 					+ "WHERE e.BusinessEntityID = p.BusinessEntityID";
@@ -210,7 +230,7 @@ public class DAL {
 		// #### Metadata 2: All Keys
 
 		public ResultSetMetaData metadata2_AllKeys() throws SQLException {
-			Connection con2 = login();
+			Connection con2 = DriverManager.getConnection(connectionURL2);
 			String query = "USE AdventureWorks2019 "
 					+ "	SELECT  pk.CONSTRAINT_NAME AS 'KEYS' "
 					+ "	FROM  INFORMATION_SCHEMA.KEY_COLUMN_USAGE pk "
@@ -224,7 +244,7 @@ public class DAL {
 		// #### Metadata 2: All table_constraints
 
 		public ResultSetMetaData metadata2_AllTableConstraints() throws SQLException {
-			Connection con2 = login();
+			Connection con2 = DriverManager.getConnection(connectionURL2);
 			String query = "SELECT * "
 					+ "FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS";
 			PreparedStatement ps = con2.prepareStatement(query);
@@ -236,7 +256,7 @@ public class DAL {
 		// #### Metadata 2: 1 - All tables in AdventureWorks2019
 
 		public ResultSetMetaData metadata2_AllTablesInDatabse1()throws SQLException {
-			Connection con2 = login();
+			Connection con2 = DriverManager.getConnection(connectionURL2);
 		String query = "SELECT name "
 				+ "FROM AdventureWorks2019.sys.tables";
 		PreparedStatement ps = con2.prepareStatement(query);
@@ -249,7 +269,7 @@ public class DAL {
 		// #### Metadata 2: 2 - All tables in AdventureWorks2019
 
 		public ResultSetMetaData metadata2_AllTablesInDatabse2()throws SQLException {
-			Connection con2 = login();
+			Connection con2 = DriverManager.getConnection(connectionURL2);
 		String query = "SELECT TABLE_NAME*TABLE_NAME "
 				+ "FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS";
 		PreparedStatement ps = con2.prepareStatement(query);
@@ -261,7 +281,7 @@ public class DAL {
 		// #### Metadata 2: 1  All columns in the SalesLT.Customer table
 		
 		public ResultSetMetaData metadata2_AllColumnsInSalesCustomer1() throws SQLException {
-			Connection con2 = login();
+			Connection con2 = DriverManager.getConnection(connectionURL2);
 		String query = "SELECT * "
 				+ "FROM Sales.Customer";
 		PreparedStatement ps = con2.prepareStatement(query);
@@ -273,7 +293,7 @@ public class DAL {
 		// #### Metadata 2: 2  All columns in the SalesLT.Customer table
 		
 		public ResultSetMetaData  metadata2_AllColumnsInSalesCustomer2() throws SQLException {
-			Connection con2 = login();
+			Connection con2 = DriverManager.getConnection(connectionURL2);
 		String query =  "SELECT name AS 'Columns' "
 				+ "FROM syscolumns where id=object_id('Sales.Customer')";
 		PreparedStatement ps = con2.prepareStatement(query);
@@ -286,33 +306,24 @@ public class DAL {
 		// #### Metadata 2: The name of the table in the AdventureWorks2019 containing 
 		// #### the highest number of rows 
 		
-		public ResultSetMetaData metadata2_NameOfTableWithHighestNumberOfRows() throws SQLException{
-			Connection con2 = login();
+		public ResultSetMetaData metadata2_NameOfTableWithHighestNumberOfRows() throws SQLException{ 
+			
+			Connection con2 = DriverManager.getConnection(connectionURL2);
 			String query = "SELECT QUOTENAME(SCHEMA_NAME(sO.schema_id)) + '.' + QUOTENAME(sO.name) AS TableName, sdmvPTNS.row_count "
 					+ "FROM sys.objects as sO"
 					+ "JOIN sys.dm_db_partition_stats AS sdmvPTNS ON sO.object_id = sdmvPTNS.object_id "
 					+ "WHERE sO.type = 'U' /* U = Table */// "
-		//			+ "AND sO.is_ms_shipped = 0x0 /*Object is createed by an internal SQL Server component with a 0*0 bit*/ "
-			//		+ "AND sdmvPTNS.index_id < 2 /* INDEX ID of sdmvPTRN, show less than 2*/"
-//					+ ""
-	//				+ "GROUP BY sO.schema_ID, sO.name , sdmvPTNS.row_count "
-		//			+ "ORDER BY sdmvPTNS.row_count DESC";
-
-
-
-
-
-			/*
+				+ "AND sO.is_ms_shipped = 0x0 /*Object is createed by an internal SQL Server component with a 0*0 bit*/ "
+					+ "AND sdmvPTNS.index_id < 2 /* INDEX ID of sdmvPTRN, show less than 2*/"
+					+ ""
+					+ "GROUP BY sO.schema_ID, sO.name , sdmvPTNS.row_count "
+					+ "ORDER BY sdmvPTNS.row_count DESC";
 			PreparedStatement ps = con2.prepareStatement(query);
 			ResultSet resultSet = ps.executeQuery();
 			ResultSetMetaData rsmd = resultSet.getMetaData();
-
-			System.out.println("TableName: " + rsmd.getTableName(1));
-			System.out.println("*******************");
-
 			return rsmd;
 		}
-*/
+
 		
 	}
 
