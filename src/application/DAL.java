@@ -17,8 +17,6 @@ public class DAL {
 	   
 	   public DAL() throws IOException { 
 		 
-		   // Inloggning för den nya databasen för att visa METADATA
-		   
 		/*   System.out.println("DB server name: " +System.getenv("DATABASE_SERVER_NAME"));
 		   System.out.println("port: " + System.getenv("DATABASE_SERVER_PORT"));
 		   System.out.println("DB namn: " + System.getenv("DATABASE_NAME") );
@@ -26,19 +24,15 @@ public class DAL {
 		   System.out.println("DB User Password: " + System.getenv("DATABASE_USER_PASSWORD") );
 		   
 		   */
-		   	
-		   //String connectionURL = "jdbc:sqlserver://vmdev001:1433;";
-			//Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-
-
-		   
-		   
+	   
 	   String databaseServerName = System.getenv("DATABASE_SERVER_NAME"); 
 	   String databaseServerPort = System.getenv("DATABASE_SERVER_PORT");
 	   String databaseName = System.getenv("DATABASE_NAME");
 	   String databaseUserName = System.getenv("DATABASE_USER_NAME");
 	   String databaseUserPassword = System.getenv("DATABASE_USER_PASSWORD"); 
+	   //String connectionURL = "jdbc:sqlserver://vmdev001:1433;";
 
+	//Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
 	           connectionURL = "jdbc:sqlserver://"
 	                   + databaseServerName 
@@ -51,50 +45,27 @@ public class DAL {
 	                   + "trustServerCertificate=true"; 
 	   }       
 	
-	// #### Registration of consultant/employee
+
+	
+	// #### Creating consultants 
 	   public void createEmployee(String Name, String Address, String Startdate, int Salary) 
 			   throws SQLException {
 		   
 		   String EmpID = generateConsultantID();
-		   String query = "INSERT INTO CONSULTANT VALUES(?,?,?,?,?) SET NOCOUNT ON";
+		   String query = "INSERT INTO CONSULTANT VALUES(?,?,?,?) SET NOCOUNT ON";
 		   Connection connection = DriverManager.getConnection(connectionURL);
 		   PreparedStatement ps = connection.prepareStatement(query);
-		   ps.setString(1, EmpID);
-		   ps.setString(2, Name);
-		   ps.setString(3, Address);
-		   ps.setString(4, Startdate);
-		   ps.setInt(5, Salary);
+		   ps.setString(1, Name);
+		   ps.setString(2, Address);
+		   ps.setString(3, Startdate);
+		   ps.setInt(4, Salary);
 		   ps.executeUpdate();
 		   ps.close();
 		   connection.close();
 		  }
 	  
-	// method for generating a consultant ID
-	    public String generateConsultantID() {
-	        Random rand = new Random();
-	        String EmpID = "C";
-	        for (int i = 0; i < 5; i++) {
-	            EmpID += rand.nextInt(10);
-	        }
-	        return EmpID;
-	    }
-	    
-	// #### Registration of consultant and their hours on a project (Går att använda även för konsulter som inte jobbar aktivt på ett visst projekt genom active/not active)
-	    public void registerHours(String EmpID, int projectID, Float Hours, boolean IsAvctive)
-	    throws SQLException {
-	    	String query = "INSERT INTO WORK VALUES(?,?,?,?) SET NOCOUNT ON";
-	    	Connection connection = DriverManager.getConnection(connectionURL);
-			PreparedStatement ps = connection.prepareStatement(query);
-			ps.setString(1, EmpID);
-			ps.setInt(2, projectID);
-			ps.setFloat(3, Hours);
-			ps.setBoolean(4, IsAvctive);
-			ps.executeUpdate();
-			connection.close();
-
-	    }
 	   
-  // #### Registration of Milestone 
+	   // create milestone 
 	   
 	   public void createMilestone(String Type, int ProjectID, int dateOfCompletion) 
 			   throws SQLException {
@@ -108,56 +79,71 @@ public class DAL {
 			   
 			   ps.executeUpdate();
 			   ps.close();
-			   connection.close();		   
+			   connection.close();
+					   
 		   }
+	
 	   
- // #### creating projects
+	   // create projects
 	   public void createProject(int Budget, String ProjectName, String ProjectStartdate)
 			   throws SQLException{
 		   
 			   int ProjectID = generateProjectID();
-			   String query ="INSERT INTO PROJECT VALUES (?,?,?,?)";
+			   String query ="INSERT INTO PROJECT VALUES (?,?,?)";
 			   Connection connection = DriverManager.getConnection(connectionURL);
 			   PreparedStatement ps = connection.prepareStatement(query);
-			   ps.setInt(1, ProjectID);
-			   ps.setInt(2, Budget);
-			   ps.setString(3, ProjectName);
-			   ps.setString(4, ProjectStartdate);
+			   ps.setInt(1, Budget);
+			   ps.setString(2, ProjectName);
+			   ps.setString(3, ProjectStartdate);
+			   
 			   ps.executeUpdate();
 			   ps.close();
 			   connection.close();
 			   
 	   }
 	   
-		// Method for generating a project ID 
-		public int generateProjectID() {
-			Random rand = new Random();
-			int ProjectID = 0;
-			for(int i = 0; i < 5; i++) {
-				ProjectID += rand.nextInt(10);
-			}
-			return ProjectID;
-		}
-	   
-	// Functional requirement --  FINDING A PROJECT BY PROJECTID
+	// View project 
 	  public ResultSet getProject(int ProjectID) throws SQLException {
-		String query = "SELECT * FROM PROJECT WHERE ProjectID = ?";
+		String query = "SELECT ProjectID FROM PROJECT";
 		Connection connection = DriverManager.getConnection(connectionURL);
 		PreparedStatement ps = connection.prepareStatement(query);
 		ps.setInt(1, ProjectID);
 		ResultSet projectResult = ps.executeQuery();
 		return projectResult;
 	}
-    	
+
+	
+	// Method for generating a project ID
+	public static int generateProjectID() {
+		Random rand = new Random();
+		int id = 0;
+		for(int i = 0; i < 5; i++) {
+			id += rand.nextInt(10);
+		}
+		return id;
+	}
+	
+	// #### ALL METHODS FOR CONSULTANT 
+	
 	// Query for finding a consultant by employee ID
 	public ResultSet getConsultantEmpID() throws SQLException {
 		Connection connection = DriverManager.getConnection(connectionURL);
-		String query = "SELECT * FROM CONSULTANT WHERE EmpID = ? ";
+		String query = "SELECT EmpID FROM CONSULTANT";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ResultSet projectResult = ps.executeQuery();
 		return projectResult;
 	}
 	
+	// method for generating a consultant ID
+    public static String generateConsultantID() {
+        Random rand = new Random();
+        String id = "C";
+        for (int i = 0; i < 5; i++) {
+            id += rand.nextInt(10);
+        }
+        return id;
+    }
+ 
     // method for getting managers
    public ResultSet getManagers() throws SQLException {
 	   Connection connection = DriverManager.getConnection(connectionURL);
@@ -171,7 +157,7 @@ public class DAL {
 	
 	// Query for viewing milestones
 	public ResultSet viewMilestones() throws SQLException {
-		String query = "SELECT MilestoneType FROM Milestones";
+		String query = "SELECT MilestoneType AS Milestones FROM Milestones";
 		Connection connection = DriverManager.getConnection(connectionURL);
 		PreparedStatement ps = connection.prepareStatement(query);
 		ResultSet projectResult = ps.executeQuery();
@@ -206,10 +192,8 @@ public class DAL {
 		ResultSet projectResult = ps.executeQuery(query);
 		return projectResult;
 	}
-}
-
 	
-	 /*
+	/*
 	// #### Metadata 1
 
 		public ResultSetMetaData metadata_1() throws SQLException {
@@ -307,22 +291,18 @@ public class DAL {
 			String query = "SELECT QUOTENAME(SCHEMA_NAME(sO.schema_id)) + '.' + QUOTENAME(sO.name) AS TableName, sdmvPTNS.row_count "
 					+ "FROM sys.objects as sO"
 					+ "JOIN sys.dm_db_partition_stats AS sdmvPTNS ON sO.object_id = sdmvPTNS.object_id "
-					+ "WHERE sO.type = 'U' /* U = Table */ /*"
-					+ "AND sO.is_ms_shipped = 0x0 /*Object is created by an internal SQL Server component with a 0*0 bit*/// "
-				//	+ "AND sdmvPTNS.index_id < 2 /* INDEX ID of sdmvPTRN, show less than 2*/"
-				//	+ ""
-				//	+ "GROUP BY sO.schema_ID, sO.name , sdmvPTNS.row_count "
-				//	+ "ORDER BY sdmvPTNS.row_count DESC";
-					
-
-/*
+					+ "WHERE sO.type = 'U' /* U = Table */// "
+		//			+ "AND sO.is_ms_shipped = 0x0 /*Object is createed by an internal SQL Server component with a 0*0 bit*/ "
+			//		+ "AND sdmvPTNS.index_id < 2 /* INDEX ID of sdmvPTRN, show less than 2*/"
+//					+ ""
+	//				+ "GROUP BY sO.schema_ID, sO.name , sdmvPTNS.row_count "
+		//			+ "ORDER BY sdmvPTNS.row_count DESC";
 
 
-		}
-	
-		
 
-			
+
+
+			/*
 			PreparedStatement ps = con2.prepareStatement(query);
 			ResultSet resultSet = ps.executeQuery();
 			ResultSetMetaData rsmd = resultSet.getMetaData();
@@ -332,6 +312,10 @@ public class DAL {
 
 			return rsmd;
 		}
-		
 */
+		
+	}
+
+	
+			//hej
 
