@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Tab?>
@@ -11,30 +12,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane fx:id="TabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+<TabPane fx:id="TabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
   <tabs>
     <Tab fx:id="TabConsultant" text="Consultant">
       <content>
         <AnchorPane fx:id="AnchorPaneConsultant" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TextArea fx:id="TextAreaConsultant" layoutX="96.0" layoutY="228.0" prefHeight="100.0" prefWidth="408.0" promptText="Make sure you have entered all requiered fields before pressing &quot;Create employee&quot;">
+                  <TextArea fx:id="TextAreaConsultant" layoutX="122.0" layoutY="288.0" prefHeight="100.0" prefWidth="408.0" promptText="Make sure you have entered all requiered fields before pressing &quot;Create employee&quot;">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></TextArea>
-                  <Label layoutX="14.0" layoutY="34.0" prefHeight="18.0" prefWidth="50.0" text="Name" underline="true" />
-                  <Label layoutX="15.0" layoutY="101.0" prefHeight="18.0" prefWidth="65.0" text="Start date" underline="true" />
-                  <Label layoutX="14.0" layoutY="67.0" prefHeight="18.0" prefWidth="50.0" text="Address" underline="true" />
-                  <Label layoutX="14.0" layoutY="139.0" prefHeight="18.0" prefWidth="50.0" text="Salary" underline="true" />
-                  <Label layoutX="15.0" layoutY="6.0" prefHeight="18.0" prefWidth="218.0" text="Please enter empoyee information" underline="true">
+                  <Label layoutX="14.0" layoutY="72.0" prefHeight="18.0" prefWidth="50.0" text="Name" />
+                  <Label layoutX="14.0" layoutY="102.0" prefHeight="18.0" prefWidth="50.0" text="Address" />
+                  <Label layoutX="14.0" layoutY="140.0" prefHeight="18.0" prefWidth="50.0" text="Salary" />
+                  <Label layoutX="15.0" prefHeight="49.0" prefWidth="542.0" text="Employee registration">
                      <font>
-                        <Font name="System Bold" size="12.0" />
+                        <Font name="Calibri" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="TextFieldConsultantName" layoutX="77.0" layoutY="21.0" promptText="First name Last name" />
-                  <TextField fx:id="TextFieldConsultantAddress" layoutX="77.0" layoutY="57.0" promptText="City/Street Name/Nbr" />
-                  <TextField fx:id="TextFieldConsultantStartdate" layoutX="77.0" layoutY="88.0" promptText="dd-mm-yy" />
-                  <TextField fx:id="TextFieldSalary" layoutX="77.0" layoutY="126.0" promptText="Enter salary in SEK" />
-                  <Button fx:id="ButtonCreateEmployee" layoutX="88.0" layoutY="180.0" mnemonicParsing="false" onAction="#createEmployeeRunButton" prefHeight="30.0" prefWidth="130.0" text="Create Employee" />
+                  <TextField fx:id="TextFieldConsultantName" layoutX="77.0" layoutY="68.0" promptText="First name Last name" />
+                  <TextField fx:id="TextFieldConsultantAddress" layoutX="77.0" layoutY="98.0" promptText="City/Street Name/Nbr" />
+                  <TextField fx:id="TextFieldSalary" layoutX="77.0" layoutY="136.0" promptText="Enter salary in SEK" />
+                  <Button fx:id="CreateEmployeeRunButton" layoutX="426.0" layoutY="184.0" mnemonicParsing="false" onAction="#createEmployeeRunButton" text="Create employee" />
+                  <DatePicker fx:id="myDatePicker" layoutX="377.0" layoutY="68.0" onAction="#getDate" promptText="Enter a date" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -74,7 +74,7 @@
                   <TextField fx:id="TextFieldProjectName" layoutX="81.0" layoutY="16.0" promptText="Enter project name" />
                   <TextField fx:id="TextFieldProjectStartDate" layoutX="81.0" layoutY="52.0" promptText="dd-mm-yy" />
                   <TextField fx:id="TextFieldProjectBudget" layoutX="83.0" layoutY="88.0" promptText="Enter budget in SEK" />
-                  <Button fx:id="ButtonCreateProject" layoutX="70.0" layoutY="174.0" mnemonicParsing="false" onAction="#projectRunButton" prefHeight="30.0" prefWidth="184.0" text="Create project" />
+                  <Button fx:id="CreateProjectRunButton" layoutX="70.0" layoutY="174.0" mnemonicParsing="false" onAction="#CreateProjectRunButton" prefHeight="30.0" prefWidth="184.0" text="Create project" />
                </children></AnchorPane>
       </content>
     </Tab>
