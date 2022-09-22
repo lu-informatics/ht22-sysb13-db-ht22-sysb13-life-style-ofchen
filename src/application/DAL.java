@@ -17,13 +17,13 @@ public class DAL {
 	   
 	   public DAL() throws IOException { 
 		 
-		/*   System.out.println("DB server name: " +System.getenv("DATABASE_SERVER_NAME"));
+		  System.out.println("DB server name: " +System.getenv("DATABASE_SERVER_NAME"));
 		   System.out.println("port: " + System.getenv("DATABASE_SERVER_PORT"));
 		   System.out.println("DB namn: " + System.getenv("DATABASE_NAME") );
 		   System.out.println("DB User name: " + System.getenv("DATABASE_USER_NAME"));
 		   System.out.println("DB User Password: " + System.getenv("DATABASE_USER_PASSWORD") );
 		   
-		   */
+		   
 	   
 	   String databaseServerName = System.getenv("DATABASE_SERVER_NAME"); 
 	   String databaseServerPort = System.getenv("DATABASE_SERVER_PORT");
@@ -38,7 +38,7 @@ public class DAL {
 	                   + databaseServerName 
 	                   + ":"
 	                   + databaseServerPort + ";"
-	                   + "database=" + databaseName + ";"
+	                   + "database=" + databaseName + ";" 
 	                   + "user=" + databaseUserName + ";"
 	                   + "password=" + databaseUserPassword + ";"
 	                   + "encrypt=true;" 
@@ -48,58 +48,51 @@ public class DAL {
 
 	
 	// #### Creating consultants 
-	   public void createEmployee(String Name, String Address, String Startdate, int Salary) 
+	   public boolean createEmployee(String EmpID, String Name, String Address, String Startdate, int Salary) 
 			   throws SQLException {
-		   
-		   String EmpID = generateConsultantID();
-		   String query = "INSERT INTO CONSULTANT VALUES(?,?,?,?) SET NOCOUNT ON";
+		   String query = "INSERT INTO CONSULTANT OUTPUT INSERTED.EmpID VALUES(?,?,?,?,?,?) SET NOCOUNT ON";
 		   Connection connection = DriverManager.getConnection(connectionURL);
 		   PreparedStatement ps = connection.prepareStatement(query);
-		   ps.setString(1, Name);
-		   ps.setString(2, Address);
-		   ps.setString(3, Startdate);
-		   ps.setInt(4, Salary);
-		   ps.executeUpdate();
-		   ps.close();
-		   connection.close();
+		   ps.setString(1, EmpID);
+		   ps.setString(2, Name);
+		   ps.setString(3, Address);
+		   ps.setString(4, Startdate);
+		   ps.setInt(5, Salary);
+		   ps.setString(6, null);
+		   return ps.execute();
 		  }
 	  
 	   
 	   // create milestone 
 	   
-	   public void createMilestone(String Type, int ProjectID, int dateOfCompletion) 
+	   public boolean createMilestone(String Type, int ProjectID, int dateOfCompletion) 
 			   throws SQLException {
-		  
 			   String query = "INSERT INTO MILESTONES VALUES (?,?,?)";
 			   Connection connection = DriverManager.getConnection(connectionURL);
 			   PreparedStatement ps = connection.prepareStatement(query);
 			   ps.setString(1, Type);
-			   ps.setInt(2,ProjectID);
+			   ps.setInt(2, ProjectID);
 			   ps.setInt(3, dateOfCompletion);
+			   return ps.execute();
 			   
-			   ps.executeUpdate();
-			   ps.close();
-			   connection.close();
 					   
 		   }
 	
 	   
 	   // create projects
-	   public void createProject(int Budget, String ProjectName, String ProjectStartdate)
+	   public boolean createProject(int ProjectID, int Budget, String ProjectName, String ProjectStartdate)
 			   throws SQLException{
 		   
-			   int ProjectID = generateProjectID();
-			   String query ="INSERT INTO PROJECT VALUES (?,?,?)";
+			   
+			   String query ="INSERT INTO PROJECT VALUES (?,?,?,?)";
 			   Connection connection = DriverManager.getConnection(connectionURL);
 			   PreparedStatement ps = connection.prepareStatement(query);
-			   ps.setInt(1, Budget);
-			   ps.setString(2, ProjectName);
-			   ps.setString(3, ProjectStartdate);
-			   
-			   ps.executeUpdate();
-			   ps.close();
-			   connection.close();
-			   
+			   ps.setInt(1, ProjectID);
+			   ps.setInt(2, Budget);
+			   ps.setString(3, ProjectName);
+			   ps.setString(4, ProjectStartdate);
+			  return ps.execute();
+			  
 	   }
 	   
 	// View project 
@@ -147,7 +140,7 @@ public class DAL {
     // method for getting managers
    public ResultSet getManagers() throws SQLException {
 	   Connection connection = DriverManager.getConnection(connectionURL);
-	   String query = "SELECT ConsultantName FROM CONSULTANT WHERE ManagerID IS NULL";
+	   String query = "SELECT EmpID, ConsultantName FROM CONSULTANT WHERE ManagerID IS NULL";
 	   PreparedStatement ps = connection.prepareStatement(query);
 		ResultSet projectResult = ps.executeQuery();
 		return projectResult;

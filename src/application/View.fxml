@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Tab?>
@@ -11,19 +12,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane fx:id="TabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+<TabPane fx:id="TabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
   <tabs>
     <Tab fx:id="TabConsultant" text="Consultant">
       <content>
         <AnchorPane fx:id="AnchorPaneConsultant" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TextArea fx:id="TextAreaConsultant" layoutX="96.0" layoutY="228.0" prefHeight="100.0" prefWidth="408.0" promptText="Make sure you have entered all requiered fields before pressing &quot;Create employee&quot;">
+                  <TextArea fx:id="TextAreaConsultant" layoutX="146.0" layoutY="265.0" prefHeight="100.0" prefWidth="408.0" promptText="Make sure you have entered all requiered fields before pressing &quot;Create employee&quot;">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></TextArea>
                   <Label layoutX="14.0" layoutY="34.0" prefHeight="18.0" prefWidth="50.0" text="Name" underline="true" />
-                  <Label layoutX="15.0" layoutY="101.0" prefHeight="18.0" prefWidth="65.0" text="Start date" underline="true" />
-                  <Label layoutX="14.0" layoutY="67.0" prefHeight="18.0" prefWidth="50.0" text="Address" underline="true" />
+                  <Label layoutX="8.0" layoutY="68.0" prefHeight="18.0" prefWidth="80.0" text="Employee ID" underline="true" />
+                  <Label layoutX="14.0" layoutY="102.0" prefHeight="18.0" prefWidth="50.0" text="Address" underline="true" />
                   <Label layoutX="14.0" layoutY="139.0" prefHeight="18.0" prefWidth="50.0" text="Salary" underline="true" />
                   <Label layoutX="15.0" layoutY="6.0" prefHeight="18.0" prefWidth="218.0" text="Please enter empoyee information" underline="true">
                      <font>
@@ -31,10 +32,11 @@
                      </font>
                   </Label>
                   <TextField fx:id="TextFieldConsultantName" layoutX="77.0" layoutY="21.0" promptText="First name Last name" />
-                  <TextField fx:id="TextFieldConsultantAddress" layoutX="77.0" layoutY="57.0" promptText="City/Street Name/Nbr" />
-                  <TextField fx:id="TextFieldConsultantStartdate" layoutX="77.0" layoutY="88.0" promptText="dd-mm-yy" />
-                  <TextField fx:id="TextFieldSalary" layoutX="77.0" layoutY="126.0" promptText="Enter salary in SEK" />
+                  <TextField fx:id="TextFieldConsultantAddress" layoutX="77.0" layoutY="98.0" promptText="City/Street Name/Nbr" />
+                  <TextField fx:id="TextFieldEmpID" layoutX="77.0" layoutY="64.0" promptText="C-XXXXX" />
+                  <TextField fx:id="TextFieldSalary" layoutX="77.0" layoutY="136.0" promptText="Enter salary in SEK" />
                   <Button fx:id="ButtonCreateEmployee" layoutX="88.0" layoutY="180.0" mnemonicParsing="false" onAction="#createEmployeeRunButton" prefHeight="30.0" prefWidth="130.0" text="Create Employee" />
+                  <DatePicker fx:id="DatePickerConsultant" editable="false" layoutX="319.0" layoutY="40.0" onAction="#getDateConsultant" promptText="Select a date" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -59,22 +61,23 @@
         <AnchorPane fx:id="AnchorPaneProject" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <Label layoutX="16.0" layoutY="28.0" text="Name " />
-                  <Label layoutX="14.0" layoutY="64.0" text="Start date" />
+                  <Label layoutX="15.0" layoutY="131.0" text="Start date" />
                   <Label layoutX="14.0" layoutY="100.0" text="Budget" />
                   <ComboBox fx:id="ComboBoxProjectConsultants" layoutX="411.0" layoutY="52.0" prefWidth="150.0" promptText="Consultants" />
-                  <TextArea fx:id="TextAreaProject" layoutX="101.0" layoutY="212.0" prefHeight="116.0" prefWidth="417.0" promptText="Please make sure you have entered and/or selected relevant textfields for your prupose" />
+                  <TextArea fx:id="TextAreaProject" layoutX="128.0" layoutY="263.0" prefHeight="116.0" prefWidth="417.0" promptText="Please make sure you have entered and/or selected relevant textfields for your prupose" />
                   <ComboBox fx:id="ComboBoxProjectProjects" layoutX="411.0" layoutY="16.0" prefWidth="150.0" promptText="Projects" />
                   <RadioButton fx:id="RadioButtonViewProject" layoutX="336.0" layoutY="85.0" mnemonicParsing="false" text="View project information" />
-                  <Label layoutX="14.0" layoutY="137.0" text="Manager" />
+                  <Label layoutX="10.0" layoutY="173.0" text="Manager" />
                   <RadioButton fx:id="RadioButtonAssignConsultant" layoutX="336.0" layoutY="122.0" mnemonicParsing="false" text="Assign consultant to project" />
                   <RadioButton fx:id="RadioButtonNotActive" layoutX="442.0" layoutY="156.0" mnemonicParsing="false" text="Not active" />
                   <RadioButton fx:id="RadioButtonActive" layoutX="336.0" layoutY="156.0" mnemonicParsing="false" text="Active" />
-                  <Label layoutX="421.0" layoutY="162.0" text="or" />
-                  <ComboBox fx:id="ComboBoxProjectManagers" layoutX="82.0" layoutY="133.0" prefWidth="150.0" promptText="Manager" />
-                  <TextField fx:id="TextFieldProjectName" layoutX="81.0" layoutY="16.0" promptText="Enter project name" />
-                  <TextField fx:id="TextFieldProjectStartDate" layoutX="81.0" layoutY="52.0" promptText="dd-mm-yy" />
+                  <ComboBox fx:id="ComboBoxProjectManagers" layoutX="81.0" layoutY="169.0" prefWidth="150.0" promptText="Manager" />
+                  <TextField fx:id="TextFieldProjectName" layoutX="84.0" layoutY="16.0" promptText="Enter project name" />
+                  <TextField fx:id="TextFieldProjectStartDate" layoutX="82.0" layoutY="127.0" promptText="dd-mm-yy" />
                   <TextField fx:id="TextFieldProjectBudget" layoutX="83.0" layoutY="88.0" promptText="Enter budget in SEK" />
-                  <Button fx:id="ButtonCreateProject" layoutX="70.0" layoutY="174.0" mnemonicParsing="false" onAction="#projectRunButton" prefHeight="30.0" prefWidth="184.0" text="Create project" />
+                  <Button fx:id="ButtonCreateProject" layoutX="66.0" layoutY="206.0" mnemonicParsing="false" onAction="#projectRunButton" prefHeight="30.0" prefWidth="184.0" text="Create project" />
+                  <TextField fx:id="TextFieldProjectID" layoutX="84.0" layoutY="52.0" />
+                  <Label layoutX="16.0" layoutY="56.0" text="ProjectID" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -86,8 +89,8 @@
                   <TextArea fx:id="TextAreaMilestone" layoutX="87.0" layoutY="197.0" prefHeight="131.0" prefWidth="425.0" />
                   <Label layoutX="6.0" layoutY="32.0" text="1.Enter" />
                   <ComboBox fx:id="ComboBoxMilestoneMilestone" layoutX="389.0" layoutY="28.0" prefWidth="150.0" promptText="Milestones" />
-                  <ComboBox fx:id="ComboBoxMilestoneManager" layoutX="69.0" layoutY="77.0" prefWidth="150.0" promptText="Manager" />
-                  <Label layoutX="4.0" layoutY="81.0" text="2. Select" />
+                  <ComboBox fx:id="ComboBoxMilestoneManager" layoutX="69.0" layoutY="69.0" prefWidth="150.0" promptText="Manager" />
+                  <Label layoutX="5.0" layoutY="73.0" text="2. Select" />
                   <Label layoutX="3.0" layoutY="162.0" text="3. Press" />
                   <Label layoutX="13.0" layoutY="6.0" prefHeight="18.0" prefWidth="230.0" text="Create Milestone" textFill="#115ad1eb" underline="true">
                      <font>
@@ -100,9 +103,9 @@
                      </font>
                   </Label>
                   <TextField fx:id="TextFieldMilestonesType" layoutX="69.0" layoutY="29.0" promptText="Enter milestone type..." />
-                  <Button fx:id="RunButtonCreateMileStone" layoutX="70.0" layoutY="156.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="147.0" text="Create Milestone" />
-                  <TextField fx:id="TextFieldDateOfCompletition" layoutX="68.0" layoutY="109.0" />
-                  <Label layoutX="5.0" layoutY="113.0" text="3. Enter " />
+                  <Button fx:id="RunButtonCreateMileStone" layoutX="70.0" layoutY="156.0" mnemonicParsing="false" onAction="#milestoneRunButton" prefHeight="30.0" prefWidth="147.0" text="Create Milestone" />
+                  <DatePicker fx:id="DatePickerMilestone" layoutX="71.0" layoutY="112.0" onAction="#getDateMilestone" prefHeight="25.0" prefWidth="146.0" promptText="Pick a date" />
+                  <Label layoutX="5.0" layoutY="116.0" prefHeight="17.0" prefWidth="46.0" text="3. Select" />
                </children>
             </AnchorPane>
         </content>
