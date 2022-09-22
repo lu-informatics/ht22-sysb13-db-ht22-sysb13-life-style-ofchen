@@ -23,7 +23,7 @@ import javafx.fxml.FXML;
 public class Controller  {
 	DAL dal = new DAL();
 
-	
+	//hej
 	
 	
 //	RadioButtonConsultant.setToggleGroup(tgConsultant)
