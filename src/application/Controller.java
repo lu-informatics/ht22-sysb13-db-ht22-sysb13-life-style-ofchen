@@ -86,6 +86,10 @@ public class Controller  {
 	@FXML
 	private Button RunButtonCreateMileStone = new Button();
 
+	// RadioButton Metadata Tasks
+	@FXML
+	private Button RunButtonShowMetadataTasks = new Button();
+	
 	
 	// ComboBoxes Log
 	@FXML
@@ -123,7 +127,10 @@ public class Controller  {
 	private TextArea TextAreaProject = new TextArea();
 	@FXML
 	private TextArea TextAreaMilestone = new TextArea();
+	@FXML
+	private TextArea TextAreaMetadataTasks = new TextArea();
 
+	
 	// All tabs
 	@FXML
 	private Tab TabConsultant = new Tab();
@@ -133,7 +140,13 @@ public class Controller  {
 	private Tab TabProject = new Tab();
 	@FXML
 	private Tab TabMilestone = new Tab();
+	@FXML
+	private Tab TabMetadataTasks = new Tab();
+	@FXML
+	private Tab TabWindowsClientTasks = new Tab();
 
+	
+	
 		// Creating an employee 
 	public void createEmployeeRunButton() throws SQLException {
 		if(TextFieldConsultantName.getText().isEmpty()

@@ -107,5 +107,30 @@
             </AnchorPane>
         </content>
       </Tab>
+      <Tab fx:id="TabMetadataTasks" text="Metadata Tasks">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="172.0" layoutY="14.0" text="METADATA TASKS" textFill="#d02e57">
+                     <font>
+                        <Font name="System Bold" size="29.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="36.0" layoutY="68.0" text="The name of the table in the AdventureWorks database containing the highest numberof rows:">
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="RunButtonShowMetadataTasks" layoutX="274.0" layoutY="99.0" mnemonicParsing="false" text="Show" />
+                  <TextArea fx:id="TextAreaMetadataTasks" layoutX="202.0" layoutY="133.0" prefHeight="200.0" prefWidth="200.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
+      <Tab fx:id="TabWindowsClientTasks" text="Windows Client Tasks">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        </content>
+      </Tab>
   </tabs>
 </TabPane>
