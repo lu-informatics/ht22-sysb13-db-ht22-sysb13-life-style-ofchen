@@ -51,7 +51,7 @@ public class DAL {
 	                   + "trustServerCertificate=true"; 
 	   }       
 	
-	// #### Creating consultants 
+	// #### Registration of consultant/employee
 	   public void createEmployee(String Name, String Address, String Startdate, int Salary) 
 			   throws SQLException {
 		   
@@ -78,8 +78,23 @@ public class DAL {
 	        }
 	        return EmpID;
 	    }
+	    
+	// #### Registration of consultant and their hours on a project (Går att använda även för konsulter som inte jobbar aktivt på ett visst projekt genom active/not active)
+	    public void registerHours(String EmpID, int projectID, Float Hours, boolean IsAvctive)
+	    throws SQLException {
+	    	String query = "INSERT INTO WORK VALUES(?,?,?,?) SET NOCOUNT ON";
+	    	Connection connection = DriverManager.getConnection(connectionURL);
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setString(1, EmpID);
+			ps.setInt(2, projectID);
+			ps.setFloat(3, Hours);
+			ps.setBoolean(4, IsAvctive);
+			ps.executeUpdate();
+			connection.close();
+
+	    }
 	   
-  // #### Creating milestones
+  // #### Registration of Milestone 
 	   
 	   public void createMilestone(String Type, int ProjectID, int dateOfCompletion) 
 			   throws SQLException {
@@ -93,31 +108,28 @@ public class DAL {
 			   
 			   ps.executeUpdate();
 			   ps.close();
-			   connection.close();
-					   
+			   connection.close();		   
 		   }
-	
 	   
  // #### creating projects
 	   public void createProject(int Budget, String ProjectName, String ProjectStartdate)
 			   throws SQLException{
 		   
 			   int ProjectID = generateProjectID();
-			   String query ="INSERT INTO PROJECT VALUES (?,?,?)";
+			   String query ="INSERT INTO PROJECT VALUES (?,?,?,?)";
 			   Connection connection = DriverManager.getConnection(connectionURL);
 			   PreparedStatement ps = connection.prepareStatement(query);
 			   ps.setInt(1, ProjectID);
 			   ps.setInt(2, Budget);
 			   ps.setString(3, ProjectName);
 			   ps.setString(4, ProjectStartdate);
-			   
 			   ps.executeUpdate();
 			   ps.close();
 			   connection.close();
 			   
 	   }
 	   
-		// Method for generating a project ID
+		// Method for generating a project ID 
 		public int generateProjectID() {
 			Random rand = new Random();
 			int ProjectID = 0;
@@ -136,11 +148,7 @@ public class DAL {
 		ResultSet projectResult = ps.executeQuery();
 		return projectResult;
 	}
-    
- 
-	
-	// #### ALL METHODS FOR CONSULTANT 
-	
+    	
 	// Query for finding a consultant by employee ID
 	public ResultSet getConsultantEmpID() throws SQLException {
 		Connection connection = DriverManager.getConnection(connectionURL);
@@ -150,8 +158,6 @@ public class DAL {
 		return projectResult;
 	}
 	
-
-    
     // method for getting managers
    public ResultSet getManagers() throws SQLException {
 	   Connection connection = DriverManager.getConnection(connectionURL);
@@ -201,8 +207,9 @@ public class DAL {
 		return projectResult;
 	}
 }
+
 	
-	/* 
+	 /*
 	// #### Metadata 1
 
 		public ResultSetMetaData metadata_1() throws SQLException {
@@ -300,20 +307,20 @@ public class DAL {
 			String query = "SELECT QUOTENAME(SCHEMA_NAME(sO.schema_id)) + '.' + QUOTENAME(sO.name) AS TableName, sdmvPTNS.row_count "
 					+ "FROM sys.objects as sO"
 					+ "JOIN sys.dm_db_partition_stats AS sdmvPTNS ON sO.object_id = sdmvPTNS.object_id "
-			//		+ "WHERE sO.type = 'U' /* U = Table */ /*"
-			/		+ "AND sO.is_ms_shipped = 0x0 /*Object is createed by an internal SQL Server component with a 0*0 bit*/// "
-			//		+ "AND sdmvPTNS.index_id < 2 /* INDEX ID of sdmvPTRN, show less than 2*/"
+					+ "WHERE sO.type = 'U' /* U = Table */ /*"
+					+ "AND sO.is_ms_shipped = 0x0 /*Object is created by an internal SQL Server component with a 0*0 bit*/// "
+				//	+ "AND sdmvPTNS.index_id < 2 /* INDEX ID of sdmvPTRN, show less than 2*/"
 				//	+ ""
 				//	+ "GROUP BY sO.schema_ID, sO.name , sdmvPTNS.row_count "
 				//	+ "ORDER BY sdmvPTNS.row_count DESC";
 					
 
-
-
 /*
+
+
 		}
 	
-	
+		
 
 			
 			PreparedStatement ps = con2.prepareStatement(query);
@@ -325,6 +332,6 @@ public class DAL {
 
 			return rsmd;
 		}
-		*/
-
+		
+*/
 
