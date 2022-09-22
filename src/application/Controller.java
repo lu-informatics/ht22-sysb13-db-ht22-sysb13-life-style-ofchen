@@ -187,10 +187,10 @@ public class Controller  {
 	
 	// METHOD FOR REFRESHING/FILLING PROJECT COMBOBOX 
 	
-	public void refreshComboBoxLogProjects() throws SQLException {
-		ObservableList<String> listProjects = FXCollections.observableArrayList();
+	//public void refreshComboBoxLogProjects() throws SQLException {
+		//ObservableList<String> listProjects = FXCollections.observableArrayList();
 		
-		ResultSet result = dal.getProjectID();
+	/*	ResultSet result = dal.getProjectID();
 		while(result.next()) {
 			listProjects.add(result.getString(1));
 		}
@@ -198,7 +198,7 @@ public class Controller  {
 		ComboBoxMilestoneProject.setItems(listProjects);
 		ComboBoxLogProjects.setItems(listProjects);	
 		}
-		
+		*/
 // METHOD FOR FILLING MILESTONES COMBOBOX
 	public void refreshComboBoxMilestoneMilestone() throws SQLException {
 		ObservableList<String> listMilestones = FXCollections.observableArrayList();
@@ -244,10 +244,10 @@ public class Controller  {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		try {refreshComboBoxLogProjects();
+	/*	try {refreshComboBoxLogProjects();
 		} catch (SQLException e) {
 			e.printStackTrace();	
-		}
+		} */
 		try {
 			refreshComboBoxMilestoneMilestone();
 		} catch (SQLException e) {
