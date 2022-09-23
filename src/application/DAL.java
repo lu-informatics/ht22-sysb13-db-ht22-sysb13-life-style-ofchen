@@ -270,8 +270,13 @@ public class DAL {
 
 		public ResultSetMetaData metadata2_AllTablesInDatabse2()throws SQLException {
 			Connection con2 = DriverManager.getConnection(connectionURL2);
-		String query = "SELECT TABLE_NAME*TABLE_NAME "
-				+ "FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS";
+		String query = "SELECT\r\n"
+				+ "  name\r\n"
+				+ "FROM\r\n"
+				+ "  SYSOBJECTS\r\n"
+				+ "WHERE\r\n"
+				+ "  xtype = 'U';\r\n"  //U = tables
+				+ "GO";
 		PreparedStatement ps = con2.prepareStatement(query);
 		ResultSet resultSet = ps.executeQuery();
 		ResultSetMetaData rsmd = resultSet.getMetaData();
@@ -282,8 +287,9 @@ public class DAL {
 		
 		public ResultSetMetaData metadata2_AllColumnsInSalesCustomer1() throws SQLException {
 			Connection con2 = DriverManager.getConnection(connectionURL2);
-		String query = "SELECT * "
-				+ "FROM Sales.Customer";
+		String query = "SELECT COLUMN_NAME AS COLUMNS\r\n"
+				+ "FROM INFORMATION_SCHEMA.COLUMNS\r\n"
+				+ "WHERE TABLE_NAME = 'Customer'";
 		PreparedStatement ps = con2.prepareStatement(query);
 		ResultSet resultSet = ps.executeQuery();
 		ResultSetMetaData rsmd = resultSet.getMetaData();
@@ -309,15 +315,14 @@ public class DAL {
 		public ResultSetMetaData metadata2_NameOfTableWithHighestNumberOfRows() throws SQLException{ 
 			
 			Connection con2 = DriverManager.getConnection(connectionURL2);
-			String query = "SELECT QUOTENAME(SCHEMA_NAME(sO.schema_id)) + '.' + QUOTENAME(sO.name) AS TableName, sdmvPTNS.row_count "
-					+ "FROM sys.objects as sO"
-					+ "JOIN sys.dm_db_partition_stats AS sdmvPTNS ON sO.object_id = sdmvPTNS.object_id "
-					+ "WHERE sO.type = 'U' /* U = Table */// "
-				+ "AND sO.is_ms_shipped = 0x0 /*Object is createed by an internal SQL Server component with a 0*0 bit*/ "
-					+ "AND sdmvPTNS.index_id < 2 /* INDEX ID of sdmvPTRN, show less than 2*/"
-					+ ""
-					+ "GROUP BY sO.schema_ID, sO.name , sdmvPTNS.row_count "
-					+ "ORDER BY sdmvPTNS.row_count DESC";
+			String query = "SELECT TOP 1 QUOTENAME(SCHEMA_NAME(sO.schema_id)) + '.' + QUOTENAME(sO.name) AS TableName, sdmvPTNS.row_count \r\n"
+					+ "FROM sys.objects as sO\r\n"
+					+ "JOIN sys.dm_db_partition_stats AS sdmvPTNS ON sO.object_id = sdmvPTNS.object_id \r\n"
+					+ "WHERE sO.type = 'U' /* U = Table */\r\n"
+					+ "AND sO.is_ms_shipped = 0x0 /*Object is createed by an internal SQL Server component with a 0*0 bit*/ \r\n"
+					+ "AND sdmvPTNS.index_id < 2 /* INDEX ID of sdmvPTRN, show less than 2*/\r\n"
+					+ "GROUP BY sO.schema_ID, sO.name , sdmvPTNS.row_count \r\n"
+					+ "ORDER BY sdmvPTNS.row_count DESC ";
 			PreparedStatement ps = con2.prepareStatement(query);
 			ResultSet resultSet = ps.executeQuery();
 			ResultSetMetaData rsmd = resultSet.getMetaData();
