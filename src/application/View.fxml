@@ -32,8 +32,8 @@
                      </font>
                   </Label>
                   <TextField fx:id="TextFieldConsultantName" layoutX="77.0" layoutY="31.0" promptText="First name Last name" />
-                  <TextField fx:id="TextFieldConsultantAddress" layoutX="77.0" layoutY="98.0" promptText="City/Street Name/Nbr" />
-                  <TextField fx:id="TextFieldEmpID" layoutX="77.0" layoutY="64.0" promptText="C-XXXXX" />
+                  <TextField fx:id="TextFieldConsultantAddress" layoutX="77.0" layoutY="98.0" promptText="Address" />
+                  <TextField fx:id="TextFieldEmpID" layoutX="77.0" layoutY="64.0" promptText="Enter Employee ID" />
                   <TextField fx:id="TextFieldSalary" layoutX="77.0" layoutY="136.0" promptText="Enter salary in SEK" />
                   <Button fx:id="ButtonCreateEmployee" layoutX="88.0" layoutY="180.0" mnemonicParsing="false" onAction="#createEmployeeRunButton" prefHeight="30.0" prefWidth="130.0" text="Create Employee" />
                   <DatePicker fx:id="DatePickerConsultant" editable="false" layoutX="319.0" layoutY="40.0" onAction="#getDateConsultant" promptText="Select a date" />
