@@ -1,9 +1,5 @@
 package application;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.time.LocalDate;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
@@ -82,9 +78,7 @@ public class DAL {
 	   // create projects
 	   public boolean createProject(int ProjectID, int Budget, String ProjectName, String ProjectStartdate)
 			   throws SQLException{
-		   
-			   
-			   String query ="INSERT INTO PROJECT VALUES (?,?,?,?)";
+		       String query ="INSERT INTO PROJECT VALUES (?,?,?,?)";
 			   Connection connection = DriverManager.getConnection(connectionURL);
 			   PreparedStatement ps = connection.prepareStatement(query);
 			   ps.setInt(1, ProjectID);
@@ -106,15 +100,6 @@ public class DAL {
 	}
 
 	
-	// Method for generating a project ID
-	public static int generateProjectID() {
-		Random rand = new Random();
-		int id = 0;
-		for(int i = 0; i < 5; i++) {
-			id += rand.nextInt(10);
-		}
-		return id;
-	}
 	
 	// #### ALL METHODS FOR CONSULTANT 
 	

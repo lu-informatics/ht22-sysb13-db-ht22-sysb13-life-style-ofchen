@@ -41,6 +41,8 @@ public class Controller  {
 	private DatePicker DatePickerConsultant = new DatePicker(); 
 	@FXML
 	private DatePicker DatePickerMilestone = new DatePicker();
+	@FXML
+	private DatePicker DatePickerProject = new DatePicker();
 	// TextField -- Consultant 
 	@FXML
 	private TextField TextFieldConsultantName = new TextField();
@@ -153,15 +155,19 @@ public class Controller  {
 	
 	 public void getDateConsultant(ActionEvent event) {
 		  LocalDate myDate = DatePickerConsultant.getValue();
-		  String myFormattedDate = myDate.format(DateTimeFormatter.ofPattern("MM-dd-yyyy"));
 	}
 	 
 	 public void getDateMilestone(ActionEvent event) {
 		 LocalDate myDate = DatePickerMilestone.getValue();
-		 String myFormattedDate = myDate.format(DateTimeFormatter.ofPattern("MM-dd-yyyy"));
 	 }
+	 public void getDateProject(ActionEvent event) {
+		 LocalDate myDate = DatePickerMilestone.getValue();
+	 }
+	 
+	
 		// Creating an employee 
 	public void createEmployeeRunButton() throws SQLException {
+		try {
 		if(!TextFieldEmpID.getText().trim().isEmpty()
 			&&!TextFieldConsultantName.getText().isEmpty()
 			&& !TextFieldConsultantAddress.getText().isEmpty()
@@ -172,21 +178,23 @@ public class Controller  {
 				TextAreaConsultant.setText("The employee: " + TextFieldConsultantName.getText() + " (" + TextFieldEmpID.getText() + ") was created!" + "\n" + "Address: " + TextFieldConsultantAddress.getText() + "\n"
 					+ "Start date: " + DatePickerConsultant.getValue() + "\n" + "Salary: " + TextFieldSalary.getText()); // 
 				}
-				else {
-					TextAreaConsultant.setText("Something went wrong when creating an employee. Please try again");
-				}
 			}		
 		else {
 			TextAreaConsultant.setText("Oops something went wrong. Please make sure all requiered fields have been filled in before you press create employee again");
 		}
+		}
+		catch(NumberFormatException e) {
+			TextAreaProject.setText("Please make sure only numbers have been entered in the salary text field");
+		}
 	}
 		// creating a project 
 	public void projectRunButton() throws SQLException {
-		if(!TextFieldProjectName.getText().isEmpty()
-			&& ! TextFieldProjectID.getText().isEmpty()
-			&& !TextFieldProjectStartDate.getText().isEmpty()
+		try {
+		if(!TextFieldProjectName.getText().trim().isEmpty()
+			&& !TextFieldProjectID.getText().isEmpty()
+			&& DatePickerProject.getValue() != null
 			&& !TextFieldProjectBudget.getText().isEmpty()) {
-			boolean check = dal.createProject(Integer.valueOf(TextFieldProjectID.getText()), Integer.valueOf(TextFieldProjectBudget.getText()), TextFieldProjectName.getText(), TextFieldProjectStartDate.getText());
+			boolean check = dal.createProject(Integer.valueOf(TextFieldProjectID.getText()), Integer.valueOf(TextFieldProjectBudget.getText()), TextFieldProjectName.getText(), DatePickerProject.getValue().toString());
 			if(check) {
 				TextAreaProject.setText("You have successfully created the project (" + Integer.valueOf(TextFieldProjectID.getText()) +")" + "\n" + 
 				"Startdate: " + TextFieldProjectStartDate.getText() + "\n" + "Budget: " + Integer.valueOf(TextFieldProjectBudget.getText()));
@@ -198,6 +206,11 @@ public class Controller  {
 		else {
 			TextAreaConsultant.setText("Something went wrong in the database. Make sure you have entered required fields");
 		}
+		}
+		catch(NumberFormatException e) {
+			TextAreaProject.setText("Please make sure to enter only digits for the projectID and budget");
+		}
+		
 		
 	}
 			
