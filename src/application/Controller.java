@@ -241,31 +241,73 @@ public class Controller  {
 	 
 	
 		// Creating an employee 
-	public void createEmployeeRunButton() throws SQLException {
-		try {
-		if(!TextFieldEmpID.getText().trim().isEmpty()
-			&&!TextFieldConsultantName.getText().isEmpty()
-			&& !TextFieldConsultantAddress.getText().isEmpty()
-			&& DatePickerConsultant.getValue() != null
-			&& !TextFieldSalary.getText().isEmpty()) {
-				boolean check = dal.createEmployee(TextFieldEmpID.getText().trim(), TextFieldConsultantName.getText().trim(), TextFieldConsultantAddress.getText().trim(),
-						DatePickerConsultant.getValue().toString(), Integer.valueOf(TextFieldSalary.getText().trim()));
-				if(check) {
-				TextAreaConsultant.setText("The employee: " + TextFieldConsultantName.getText() + " (" + TextFieldEmpID.getText() + ") was created!" + "\n" + "Address: " + TextFieldConsultantAddress.getText() + "\n"
-					+ "Start date: " + DatePickerConsultant.getValue() + "\n" + "Salary: " + TextFieldSalary.getText()); // 
-				}
-			}		
-		else {
-			TextAreaConsultant.setText("Oops something went wrong. Please make sure all requiered fields have been filled in before you press create employee again");
-
+	 public void createEmployeeRunButton() throws SQLException {
+			try {
+			if(TextFieldEmpID.getText().trim().isEmpty()
+				&&TextFieldConsultantName.getText().isEmpty()
+				&& TextFieldConsultantAddress.getText().isEmpty()
+				&& DatePickerConsultant.getValue() == null
+				&& TextFieldSalary.getText().isEmpty()) {
+				TextAreaConsultant.setText("Oops something went wrong. Please make sure all requiered fields \nhave been filled in before you press create employee again");
+			}
+		else if (TextFieldConsultantName.getText().isEmpty()){
+			TextAreaConsultant.setText("Please, Enter First and Last Name");
+		
 		}
 		else if (TextFieldEmpID.getText().isEmpty()){
 			TextAreaConsultant.setText("Please Enter EmployeeID ");
 		}
-		else if (TextFieldConsultantAddress.getText().isEmpty()){
-			TextAreaConsultant.setText("Please Enter Address");
-		}
-	}
+						
+			else if (TextFieldConsultantAddress.getText().isEmpty()){
+				TextAreaConsultant.setText("Please Enter Address");
+			}
+				
+				else if (DatePickerConsultant.getValue()== null){
+					TextAreaConsultant.setText("Please Select Date");
+				}
+				else if (TextFieldSalary.getText().isEmpty()){
+					TextAreaConsultant.setText("Please Insert Salary");
+				}
+
+				else{
+						
+					try {
+						
+						int a = 0 ; 
+						int b = 0 ; 
+						a = Integer.parseInt(TextFieldEmpID.getText().trim()) ;
+						b = Integer.parseInt(TextFieldSalary.getText().trim()) ;
+						
+						boolean check = dal.createEmployee("C-" + Integer.parseInt(TextFieldEmpID.getText().trim()), TextFieldConsultantName.getText().trim(), 
+								TextFieldConsultantAddress.getText().trim(), 
+								DatePickerConsultant.getValue().toString(), Integer.parseInt(TextFieldSalary.getText().trim()));
+							if(check) {
+							TextAreaConsultant.setText("The employee: " + TextFieldConsultantName.getText() + " (" + TextFieldEmpID.getText() + ") was created!" + "\n" + "Address: " + TextFieldConsultantAddress.getText() + "\n"
+								+ "Start date: " + DatePickerConsultant.getValue() + "\n" + "Salary: " + TextFieldSalary.getText()); // 
+							}
+					
+					} catch (NumberFormatException e) {
+						
+						TextAreaConsultant.setText("Please present only digits in EmployeeID and Salary ");
+						
+						e.printStackTrace();
+						
+					} catch (SQLException e) {
+						TextAreaConsultant.setText(" ---- ");
+						e.printStackTrace();
+					}
+				}
+			} finally {
+			}
+			
+	
+							
+						
+						//TextAreaConsultant.setText("Please make sure to enter EmployeeID is in numbers ");
+					
+						
+					//TextAreaConsultant.setText("Please make sure to enter EmployeeID and Salary with numbers ");
+}
 	
 	// --------------------------------------------------------------------------------------------------------//----------------------------------------------------//
 	
