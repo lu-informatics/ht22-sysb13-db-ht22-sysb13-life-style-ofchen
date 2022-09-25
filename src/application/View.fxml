@@ -34,15 +34,15 @@
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="TextFieldConsultantName" layoutX="78.0" layoutY="68.0" promptText="First name Last name" />
-                  <TextField fx:id="TextFieldConsultantAddress" layoutX="78.0" layoutY="138.0" promptText="City/Street Name/Nbr" />
+                  <TextField fx:id="TextFieldConsultantName" layoutX="78.0" layoutY="69.0" promptText="First name Last name" />
+                  <TextField fx:id="TextFieldConsultantAddress" layoutX="78.0" layoutY="138.0" promptText="Address" />
                   <TextField fx:id="TextFieldEmpID" layoutX="78.0" layoutY="104.0" promptText="C-XXXXX" />
                   <TextField fx:id="TextFieldSalary" layoutX="78.0" layoutY="171.0" promptText="Enter salary in SEK" />
                   <Button fx:id="ButtonCreateEmployee" layoutX="77.0" layoutY="268.0" mnemonicParsing="false" onAction="#createEmployeeRunButton" prefHeight="30.0" prefWidth="130.0" text="Register Employee" textFill="#1e10e8">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Button>
-                  <DatePicker fx:id="DatePickerConsultant" editable="false" layoutX="77.0" layoutY="207.0" onAction="#getDateConsultant" prefHeight="25.0" prefWidth="150.0" promptText="Select a date" />
+                  <DatePicker fx:id="DatePickerConsultant" editable="false" layoutX="78.0" layoutY="207.0" onAction="#getDateConsultant" prefHeight="25.0" prefWidth="150.0" promptText="Select a date" />
                   <Label layoutX="4.0" layoutY="211.0" prefHeight="17.0" prefWidth="41.0" text="Select" underline="true" />
                   <Line fx:id="ConsultantLine" endX="1085.0" layoutX="115.0" layoutY="369.0" startX="-115.0" />
                   <Line endX="15.0" endY="251.5" layoutX="664.0" layoutY="114.0" startX="15.0" startY="-115.0" />
