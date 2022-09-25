@@ -256,6 +256,10 @@ public class Controller  {
 		}
 		else if (TextFieldEmpID.getText().isEmpty()){
 			TextAreaConsultant.setText("Please Enter EmployeeID ");
+			
+		}
+			else if (!TextFieldConsultantName.getText().matches("[A-Za-z]+")) {
+				TextAreaConsultant.setText("Invalid name, please only enter letters");
 		}
 						
 			else if (TextFieldConsultantAddress.getText().isEmpty()){
@@ -285,6 +289,10 @@ public class Controller  {
 							TextAreaConsultant.setText("The employee: " + TextFieldConsultantName.getText() + " (" + TextFieldEmpID.getText() + ") was created!" + "\n" + "Address: " + TextFieldConsultantAddress.getText() + "\n"
 								+ "Start date: " + DatePickerConsultant.getValue() + "\n" + "Salary: " + TextFieldSalary.getText()); // 
 							}
+							
+					if (b < 0) {
+						TextAreaConsultant.setText("Salary can not be less than 0");
+					}
 					
 					} catch (NumberFormatException e) {
 						
