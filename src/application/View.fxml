@@ -120,6 +120,7 @@
                   <Line endX="47.0" endY="303.0" layoutX="533.0" layoutY="14.0" startX="47.0" startY="-14.0" />
                   <Line endX="-76.0" endY="116.0" layoutX="656.0" layoutY="392.0" startX="-76.0" startY="-75.0" />
                   <TextArea fx:id="viewProjectInformationTextArea" layoutX="595.0" layoutY="139.0" prefHeight="174.0" prefWidth="452.0" promptText="Hello! To see information about a specific project,  first choose the project you would like to see and then press view!" />
+
                </children></AnchorPane>
       </content>
     </Tab>

@@ -257,10 +257,13 @@ public class Controller  {
 			}		
 		else {
 			TextAreaConsultant.setText("Oops something went wrong. Please make sure all requiered fields have been filled in before you press create employee again");
+
 		}
+		else if (TextFieldEmpID.getText().isEmpty()){
+			TextAreaConsultant.setText("Please Enter EmployeeID ");
 		}
-		catch(NumberFormatException e) {
-			TextAreaProject.setText("Please make sure only numbers have been entered in the salary text field");
+		else if (TextFieldConsultantAddress.getText().isEmpty()){
+			TextAreaConsultant.setText("Please Enter Address");
 		}
 	}
 	
@@ -335,6 +338,8 @@ public class Controller  {
 			TextAreaProject.setText("Please make sure only numbers have been entered in the hours text field");
 		}
 		}
+
+			
 	
 		// creating a project 
 	public void projectRunButton() throws SQLException { // funkar ej
