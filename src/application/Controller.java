@@ -275,7 +275,7 @@ public class Controller  {
 			try {
 				//consultantTextAreaInformation.setText("HEJ " + ConsultantComboBox.getSelectionModel().getSelectedItem().toString());
 				if(ConsultantComboBox.getSelectionModel().getSelectedItem().toString() != "") {
-					ResultSet rs = dal.getSpecificConsultantID(ConsultantComboBox.getSelectionModel().getSelectedItem().toString());
+					ResultSet rs = dal.getAllConsultantInformation(ConsultantComboBox.getSelectionModel().getSelectedItem().toString());
 					while(rs.next()) {
 						consultantTextAreaInformation.setText("Choosen consultant with the employee id (" + rs.getString(1) +" ) has the following information" + "\n" + 
 										"Name: " + rs.getString(2) + "\n" + "Address: " + rs.getString(3) + "\n"
@@ -294,15 +294,17 @@ public class Controller  {
 		@FXML
 		public void ButtonViewProject () throws SQLException {
 			try {
-				if((ComboBoxViewProject.getSelectionModel().getSelectedItem().toString()!= "")) {  // kan inte göra det till int med integer value of för att den funktionen kan inte avgöra en boolean. 
-					ResultSet rs = dal.getAllProjectInformation(Integer.valueOf((ComboBoxProjectProjects.getSelectionModel().getSelectedItem().toString())));
+				if(ComboBoxViewProject.getSelectionModel().getSelectedItem().toString() != "") {
+					viewProjectInformationTextArea.setText("hejsanhallå");
+					// kan inte göra det till int med integer value of för att den funktionen kan inte avgöra en boolean. 
+					ResultSet rs = dal.getAllProjectInformation(Integer.valueOf(ComboBoxViewProject.getSelectionModel().getSelectedItem().toString()));
 					while(rs.next()){
-						viewProjectInformationTextArea.setText("Choosen project with the ProjectID" + rs.getString(2));
+						viewProjectInformationTextArea.appendText("Choosen project with the ProjectID" + rs.getString(1));
 									}
-					} else { viewProjectInformationTextArea.setText("Something went wrong");
+					} else { viewProjectInformationTextArea.appendText("Something went wrong");
 				}
 				}catch (Exception e) { 
-					viewProjectInformationTextArea.setText("Something went wrong when calling the database");
+					viewProjectInformationTextArea.appendText("Something went wrong when calling the database" + e.getMessage());
 					
 				}
 			{
