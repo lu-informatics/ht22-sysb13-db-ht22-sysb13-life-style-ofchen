@@ -13,13 +13,6 @@ public class DAL {
 	   
 	   public DAL() throws IOException { 
 		 
-		  System.out.println("DB server name: " +System.getenv("DATABASE_SERVER_NAME"));
-		   System.out.println("port: " + System.getenv("DATABASE_SERVER_PORT"));
-		   System.out.println("DB namn: " + System.getenv("DATABASE_NAME") );
-		   System.out.println("DB User name: " + System.getenv("DATABASE_USER_NAME"));
-		   System.out.println("DB User Password: " + System.getenv("DATABASE_USER_PASSWORD") );
-		   
-		   
 	   
 	   String databaseServerName = System.getenv("DATABASE_SERVER_NAME"); 
 	   String databaseServerPort = System.getenv("DATABASE_SERVER_PORT");
@@ -43,7 +36,7 @@ public class DAL {
 	
 
 	
-	// #### Creating consultants 
+	// Creating consultants 
 	   public boolean createEmployee(String EmpID, String Name, String Address, String Startdate, int Salary) 
 			   throws SQLException {
 		   String query = "INSERT INTO CONSULTANT OUTPUT INSERTED.EmpID VALUES(?,?,?,?,?,?) SET NOCOUNT ON";
@@ -57,23 +50,6 @@ public class DAL {
 		   ps.setString(6, null);
 		   return ps.execute();
 		  }
-	  
-	   
-	   // create milestone 
-	   
-	   public boolean createMilestone(String Type, int ProjectID, int dateOfCompletion) 
-			   throws SQLException {
-			   String query = "INSERT INTO MILESTONES VALUES (?,?,?)";
-			   Connection connection = DriverManager.getConnection(connectionURL);
-			   PreparedStatement ps = connection.prepareStatement(query);
-			   ps.setString(1, Type);
-			   ps.setInt(2, ProjectID);
-			   ps.setInt(3, dateOfCompletion);
-			   return ps.execute();
-			   
-					   
-		   }
-	
 	   
 	   // create projects
 	   public boolean createProject(int ProjectID, int Budget, String ProjectName, String ProjectStartdate)
@@ -88,23 +64,54 @@ public class DAL {
 			  return ps.execute();
 			  
 	   }
-	   
-	// View project 
-	  public ResultSet getProject(int ProjectID) throws SQLException {
-		String query = "SELECT ProjectID FROM PROJECT";
-		Connection connection = DriverManager.getConnection(connectionURL);
-		PreparedStatement ps = connection.prepareStatement(query);
-		ps.setInt(1, ProjectID);
-		ResultSet projectResult = ps.executeQuery();
-		return projectResult;
-	}
 
+	// Query for viewing staffing information for a project. I.e. all consultants currently working on the project and their hours
+		public boolean viewStaffOnProject(int ProjectID) 
+			throws SQLException {
+			String query = "SELECT EmpID, ProjectID, Hours FROM WORK WHERE ProjectID = ?";
+			Connection connection = DriverManager.getConnection(connectionURL);
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setInt(1, ProjectID);
+			return ps.execute();
+			
+		}
+	// Query for Inserting hours in to TABLE "WORK" 
+		
+		public boolean AssignHours (String EmpID, int ProjectID, float Hours)
+				throws SQLException { 
+				String query = "INSERT INTO MILESTONES VALUES (?,?,?)";
+				Connection connection = DriverManager.getConnection(connectionURL);
+				PreparedStatement ps = connection.prepareStatement(query);
+				ps.setString(1, EmpID);
+				ps.setInt(2, ProjectID);
+				ps.setFloat(3, Hours);
+				return ps.execute();
+				
+		
+		}
+		
+	   
+	   // create milestone 
+	   
+	   public boolean createMilestone(String Type, int ProjectID, int dateOfCompletion) 
+			   throws SQLException {
+			   String query = "INSERT INTO MILESTONES VALUES (?,?,?)";
+			   Connection connection = DriverManager.getConnection(connectionURL);
+			   PreparedStatement ps = connection.prepareStatement(query);
+			   ps.setString(1, Type);
+			   ps.setInt(2, ProjectID);
+			   ps.setInt(3, dateOfCompletion);
+			   return ps.execute();
+		   }
 	
+	   
+	  
+	  
 	
 	// #### ALL METHODS FOR CONSULTANT 
 	
-	// Query for finding a consultant by employee ID
-	public ResultSet getConsultantEmpID() throws SQLException {
+	// Query for finding returning all EmpID´s
+	public ResultSet getAllConsultantEmpID() throws SQLException {
 		Connection connection = DriverManager.getConnection(connectionURL);
 		String query = "SELECT EmpID FROM CONSULTANT";
 		PreparedStatement ps = connection.prepareStatement(query);
@@ -112,15 +119,15 @@ public class DAL {
 		return projectResult;
 	}
 	
-	// method for generating a consultant ID
-    public static String generateConsultantID() {
-        Random rand = new Random();
-        String id = "C";
-        for (int i = 0; i < 5; i++) {
-            id += rand.nextInt(10);
-        }
-        return id;
-    }
+	// query for attaining all information about a consultant  based on a given EmpID
+	public ResultSet getSpecificConsultantID(String EmpID) throws SQLException {
+		Connection connection= DriverManager.getConnection(connectionURL);
+		String query = "SELECT * FROM CONSULTANT WHERE EmpID = '" + EmpID + "'";
+		PreparedStatement ps = connection.prepareStatement(query);
+		ResultSet IDResult = ps.executeQuery();
+		return IDResult;
+	}
+	
  
     // method for getting managers
    public ResultSet getManagers() throws SQLException {
@@ -142,16 +149,25 @@ public class DAL {
 		return projectResult;
 	}
 	
+	// View project 
+		  public ResultSet getProject() throws SQLException {
+			String query = "SELECT ProjectID FROM PROJECT";
+			Connection connection = DriverManager.getConnection(connectionURL);
+			PreparedStatement ps = connection.prepareStatement(query);
+			ResultSet projectResult = ps.executeQuery();
+			return projectResult;
+		}
+		  
+	// View specific project 
+		 public ResultSet getAllProjectInformation(int ProjectID) throws SQLException {
+			 String query = "SElECT * FROM PROJECT WHERE ProjectID =  '" + ProjectID + "'"; // kan jag få integet value här och skicka det till min controller??
+			 Connection connection = DriverManager.getConnection(query);
+			 PreparedStatement ps = connection.prepareStatement(query);
+			 ResultSet IDResultProject = ps.executeQuery();
+			 return IDResultProject;
+		 }
 	
-	// Query for viewing staffing information for a project. I.e. all consultants currently working on the project and their hours
-	public ResultSet viewStaffOnProject() throws SQLException {
-		String query = "SELECT c.EmpID, p.ProjectID, c.ConsultantName, Hours  FROM WORK w, CONSULTANT c, PROJECT p WHERE w.EmpID = c.EmpID AND w.ProjectID = p.ProjectID AND w.IsActive = 'true'\r\n"
-				+ "";
-		Connection connection = DriverManager.getConnection(connectionURL);
-		PreparedStatement ps = connection.prepareStatement(query);
-		ResultSet projectResult = ps.executeQuery();
-		return projectResult;
-	}
+	
 	
 	// Query for finding all consultants who have previously worked on a certain project
 	public ResultSet hasWorked() throws SQLException {
