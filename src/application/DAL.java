@@ -21,7 +21,12 @@ public class DAL {
 	   String databaseUserPassword = System.getenv("DATABASE_USER_PASSWORD"); 
 	   //String connectionURL = "jdbc:sqlserver://vmdev001:1433;";
 
-	//Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	   try {
+		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	} catch (ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 
 	           connectionURL = "jdbc:sqlserver://"
 	                   + databaseServerName 
@@ -120,7 +125,7 @@ public class DAL {
 	}
 	
 	// query for attaining all information about a consultant  based on a given EmpID
-	public ResultSet getSpecificConsultantID(String EmpID) throws SQLException {
+	public ResultSet getAllConsultantInformation(String EmpID) throws SQLException {
 		Connection connection= DriverManager.getConnection(connectionURL);
 		String query = "SELECT * FROM CONSULTANT WHERE EmpID = '" + EmpID + "'";
 		PreparedStatement ps = connection.prepareStatement(query);
@@ -160,7 +165,7 @@ public class DAL {
 		  
 	// View specific project 
 		 public ResultSet getAllProjectInformation(int ProjectID) throws SQLException {
-			 String query = "SElECT * FROM PROJECT WHERE ProjectID =  '" + ProjectID + "'"; // kan jag få integet value här och skicka det till min controller??
+			 String query = "SELECT * FROM PROJECT WHERE ProjectID = " + ProjectID; 
 			 Connection connection = DriverManager.getConnection(query);
 			 PreparedStatement ps = connection.prepareStatement(query);
 			 ResultSet IDResultProject = ps.executeQuery();
