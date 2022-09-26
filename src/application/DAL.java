@@ -13,51 +13,68 @@ public class DAL {
 	   
 	   public DAL() throws IOException { 
 		 
-	   
-	   String databaseServerName = System.getenv("DATABASE_SERVER_NAME"); 
-	   String databaseServerPort = System.getenv("DATABASE_SERVER_PORT");
-	   String databaseName = System.getenv("DATABASE_NAME");
-	   String databaseUserName = System.getenv("DATABASE_USER_NAME");
-	   String databaseUserPassword = System.getenv("DATABASE_USER_PASSWORD"); 
-	   //String connectionURL = "jdbc:sqlserver://vmdev001:1433;";
-
-	   try {
-		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-	} catch (ClassNotFoundException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-
+		   try {
+			   String databaseServerName = System.getenv("DATABASE_SERVER_NAME"); 
+			   String databaseServerPort = System.getenv("DATABASE_SERVER_PORT");
+			   String databaseName = System.getenv("DATABASE_NAME");
+			   String databaseUserName = System.getenv("DATABASE_USER_NAME");
+			   String databaseUserPassword = System.getenv("DATABASE_USER_PASSWORD"); 
+			   Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 	           connectionURL = "jdbc:sqlserver://"
-	                   + databaseServerName 
-	                   + ":"
-	                   + databaseServerPort + ";"
-	                   + "database=" + databaseName + ";" 
-	                   + "user=" + databaseUserName + ";"
-	                   + "password=" + databaseUserPassword + ";"
-	                   + "encrypt=true;" 
-	                   + "trustServerCertificate=true"; 
+		           + databaseServerName 
+		           + ":"
+		           + databaseServerPort + ";"
+		           + "database=" + databaseName + ";" 
+		           + "user=" + databaseUserName + ";"
+		           + "password=" + databaseUserPassword + ";"
+		           + "encrypt=true;" 
+		           + "trustServerCertificate=true"; 
+		   }
+		   catch (Exception e) {
+			   
+		   }
 	   }       
 	
 
 	
 	// Creating consultants 
-	   public boolean createEmployee(String EmpID, String Name, String Address, String Startdate, int Salary) 
-			   throws SQLException {
-		   String query = "INSERT INTO CONSULTANT OUTPUT INSERTED.EmpID VALUES(?,?,?,?,?,?) SET NOCOUNT ON";
-		   Connection connection = DriverManager.getConnection(connectionURL);
-		   PreparedStatement ps = connection.prepareStatement(query);
-		   ps.setString(1, EmpID);
-		   ps.setString(2, Name);
-		   ps.setString(3, Address);
-		   ps.setString(4, Startdate);
-		   ps.setInt(5, Salary);
-		   ps.setString(6, null);
-		   return ps.execute();
+	   public int createEmployee(String EmpID, String Name, String Address, String Startdate, int Salary) 
+		   throws SQLException {
+		   try {
+			   String query = "INSERT INTO CONSULTANT VALUES(?,?,?,?,?,?) SET NOCOUNT ON";
+			   Connection connection = DriverManager.getConnection(connectionURL);
+			   PreparedStatement ps = connection.prepareStatement(query);
+			   ps.setString(1, EmpID);
+			   ps.setString(2, Name);
+			   ps.setString(3, Address);
+			   ps.setString(4, Startdate);
+			   ps.setInt(5, Salary);
+			   ps.setString(6, null);
+			   return ps.executeUpdate();
+		   }
+		   catch (Exception e) {
+			   System.out.println("e: " + e.getMessage());
+		   }
+		   return 0;
 		  }
 	   
+   // create milestone 
+	   
+	   public int createMilestone(String Type, int ProjectID, int dateOfCompletion) 
+			   throws SQLException {
+			   String query = "INSERT INTO MILESTONES VALUES (?,?,?) SET NOCOUNT ON";
+			   Connection connection = DriverManager.getConnection(connectionURL);
+			
+			   PreparedStatement ps = connection.prepareStatement(query);
+			   ps.setString(1, Type);
+			   ps.setInt(2, ProjectID);
+			   ps.setInt(3, dateOfCompletion);
+			   return ps.executeUpdate();
+		   }
+	
+	   
 	   // create projects
-	   public boolean createProject(int ProjectID, int Budget, String ProjectName, String ProjectStartdate)
+	   public int createProject(int ProjectID, int Budget, String ProjectName, String ProjectStartdate)
 			   throws SQLException{
 		       String query ="INSERT INTO PROJECT VALUES (?,?,?,?)";
 			   Connection connection = DriverManager.getConnection(connectionURL);
@@ -66,7 +83,7 @@ public class DAL {
 			   ps.setInt(2, Budget);
 			   ps.setString(3, ProjectName);
 			   ps.setString(4, ProjectStartdate);
-			  return ps.execute();
+			  return ps.executeUpdate();
 			  
 	   }
 
@@ -96,18 +113,6 @@ public class DAL {
 		}
 		
 	   
-	   // create milestone 
-	   
-	   public boolean createMilestone(String Type, int ProjectID, int dateOfCompletion) 
-			   throws SQLException {
-			   String query = "INSERT INTO MILESTONES VALUES (?,?,?)";
-			   Connection connection = DriverManager.getConnection(connectionURL);
-			   PreparedStatement ps = connection.prepareStatement(query);
-			   ps.setString(1, Type);
-			   ps.setInt(2, ProjectID);
-			   ps.setInt(3, dateOfCompletion);
-			   return ps.execute();
-		   }
 	
 	   
 	  

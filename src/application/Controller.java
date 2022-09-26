@@ -17,6 +17,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
@@ -243,29 +245,52 @@ public class Controller  {
 		// Creating an employee 
 	public void createEmployeeRunButton() throws SQLException {
 		try {
-		if(!TextFieldEmpID.getText().trim().isEmpty()
-			&&!TextFieldConsultantName.getText().isEmpty()
-			&& !TextFieldConsultantAddress.getText().isEmpty()
-			&& DatePickerConsultant.getValue() != null
-			&& !TextFieldSalary.getText().isEmpty()) {
-				boolean check = dal.createEmployee(TextFieldEmpID.getText().trim(), TextFieldConsultantName.getText().trim(), TextFieldConsultantAddress.getText().trim(),
-						DatePickerConsultant.getValue().toString(), Integer.valueOf(TextFieldSalary.getText().trim()));
-				if(check) {
+			if(!TextFieldEmpID.getText().trim().isEmpty()
+				&&!TextFieldConsultantName.getText().isEmpty()
+				&& !TextFieldConsultantAddress.getText().isEmpty()
+				&& DatePickerConsultant.getValue() != null
+				&& !TextFieldSalary.getText().isEmpty()) {
+		
+					int check = dal.createEmployee(TextFieldEmpID.getText().trim(), TextFieldConsultantName.getText().trim(), TextFieldConsultantAddress.getText().trim(),
+							DatePickerConsultant.getValue().toString(), Integer.valueOf(TextFieldSalary.getText().trim()));
+					if(check == 1 || check == 2) {
+					TextAreaConsultant.setText("The employee: " + TextFieldConsultantName.getText() + " (" + TextFieldEmpID.getText() + ") was created!" + "\n" + "Address: " + TextFieldConsultantAddress.getText() + "\n"
+						+ "Start date: " + DatePickerConsultant.getValue() + "\n" + "Salary: " + TextFieldSalary.getText()); 
+					TextFieldConsultantName.clear();
+					TextFieldConsultantAddress.clear();
+					TextFieldSalary.clear();
+					TextFieldEmpID.clear();
+					
+					this.refreshComboBoXConsultants();
+					}
+					else {
+						TextAreaConsultant.setText("Something went wrong, check if Employee ID already exists!");
+					}
+			}
+			else {
+				TextAreaConsultant.setText("Oops something went wrong. Please make sure all requiered fields have been filled in before you press create employee again");
+			}
+		}
+			
+		catch (SQLServerException e) {
+			if (e.getErrorCode() == 114) {
 				TextAreaConsultant.setText("The employee: " + TextFieldConsultantName.getText() + " (" + TextFieldEmpID.getText() + ") was created!" + "\n" + "Address: " + TextFieldConsultantAddress.getText() + "\n"
-					+ "Start date: " + DatePickerConsultant.getValue() + "\n" + "Salary: " + TextFieldSalary.getText()); // 
-				}
-			}		
-		else {
-			TextAreaConsultant.setText("Oops something went wrong. Please make sure all requiered fields have been filled in before you press create employee again");
-
+						+ "Start date: " + DatePickerConsultant.getValue() + "\n" + "Salary: " + TextFieldSalary.getText()); 
+				TextFieldConsultantName.clear();
+				TextFieldConsultantAddress.clear();
+				TextFieldSalary.clear();
+				TextFieldEmpID.clear();
+				
+				this.refreshComboBoXConsultants();
+			}
+		TextAreaConsultant.setText("There is already an employee with that ID. Please choose a different one!" + "\n " + e.getMessage());	
 		}
-		else if (TextFieldEmpID.getText().isEmpty()){
-			TextAreaConsultant.setText("Please Enter EmployeeID ");
-		}
-		else if (TextFieldConsultantAddress.getText().isEmpty()){
-			TextAreaConsultant.setText("Please Enter Address");
+		catch (NumberFormatException e) {
+			TextAreaConsultant.setText("Please input digits");
 		}
 	}
+	
+
 	
 	// --------------------------------------------------------------------------------------------------------//----------------------------------------------------//
 	
@@ -273,7 +298,6 @@ public class Controller  {
 		@FXML
 		public void viewEmployeeInformationButton() throws SQLException {
 			try {
-				//consultantTextAreaInformation.setText("HEJ " + ConsultantComboBox.getSelectionModel().getSelectedItem().toString());
 				if(ConsultantComboBox.getSelectionModel().getSelectedItem().toString() != "") {
 					ResultSet rs = dal.getAllConsultantInformation(ConsultantComboBox.getSelectionModel().getSelectedItem().toString());
 					while(rs.next()) {
@@ -295,8 +319,7 @@ public class Controller  {
 		public void ButtonViewProject () throws SQLException {
 			try {
 				if(ComboBoxViewProject.getSelectionModel().getSelectedItem().toString() != "") {
-					viewProjectInformationTextArea.setText("hejsanhallå");
-					// kan inte göra det till int med integer value of för att den funktionen kan inte avgöra en boolean. 
+					this.refreshComboBoxProject();
 					ResultSet rs = dal.getAllProjectInformation(Integer.valueOf(ComboBoxViewProject.getSelectionModel().getSelectedItem().toString()));
 					while(rs.next()){
 						viewProjectInformationTextArea.appendText("Choosen project with the ProjectID" + rs.getString(1));
@@ -346,53 +369,62 @@ public class Controller  {
 		// creating a project 
 	public void projectRunButton() throws SQLException { // funkar ej
 		try {
-		if(!TextFieldProjectName.getText().trim().isEmpty()
-			&& !TextFieldProjectID.getText().isEmpty()
-			&& DatePickerProject.getValue() != null
-			&& !TextFieldProjectBudget.getText().isEmpty()) {
-			boolean check = dal.createProject(Integer.valueOf(TextFieldProjectID.getText().toString()), Integer.valueOf(TextFieldProjectBudget.getText().toString()),
+			if(!TextFieldProjectName.getText().trim().isEmpty()
+				&& !TextFieldProjectID.getText().isEmpty()
+				&& DatePickerProject.getValue() != null
+				&& !TextFieldProjectBudget.getText().isEmpty()) {
+					this.refreshComboBoxProject();
+					int check = dal.createProject(Integer.parseInt(TextFieldProjectID.getText().toString()), Integer.parseInt(TextFieldProjectBudget.getText().toString()),
 					TextFieldProjectName.getText(), DatePickerProject.getValue().toString());
-			if(check == true) {
-				TextAreaProject.setText("You have successfully created the project (" + Integer.valueOf(TextFieldProjectID.getText()) +")" + "\n" + 
-				"Startdate: " + DatePickerProject.getValue() + "\n" + "Budget: " + Integer.valueOf(TextFieldProjectBudget.getText()));
-			
+					if(check == 1) {
+						TextFieldProjectID.clear();
+						TextFieldProjectName.clear();
+						TextFieldProjectBudget.clear();
+						TextAreaProject.setText("You have successfully created the project (" + Integer.parseInt(TextFieldProjectID.getText()) +")" + "\n" + 
+						"Startdate: " + DatePickerProject.getValue() + "\n" + "Budget: " + Integer.parseInt(TextFieldProjectBudget.getText()));
+					
+					}
+				else {
+					TextAreaProject.setText("Something went wrong when creating the project. Please try again or contact support");		
+				}
 			}
 			else {
-				TextAreaProject.setText("Something went wrong when creating the project. Please try again or contact support");		
+				TextAreaProject.setText("Something went wrong in the database. Make sure you have entered required fields");
+			}
+			}catch(NumberFormatException e) {
+				TextAreaProject.setText("Please make sure to enter only digits for the projectID and budget");
+			}catch (SQLServerException e) {
+			TextAreaProject.setText("There is already a project with that ID. Please choose a different one and try again!");
 			}
 		}
-		else {
-			TextAreaProject.setText("Something went wrong in the database. Make sure you have entered required fields");
-		}
-		}
-		catch(NumberFormatException e) {
-			TextAreaProject.setText("Please make sure to enter only digits for the projectID and budget");
-		}
-		
-		
-	}
 	
 	//----------------------------------------------------//----------------------------------------------------//----------------------------------------------------//----------------------------------------------------//
 		// Creating a milestone 
 	public void milestoneRunButton() throws SQLException {
-		if (!TextFieldMilestonesType.getText().isEmpty()
-			&& !(ComboBoxMilestoneProject.getSelectionModel().getSelectedItem() == null)
-			&& DatePickerMilestone.getValue().toString().isEmpty()) {
-				boolean check = dal.createMilestone(TextFieldMilestonesType.getText().trim(),
+		try {
+			if (!TextFieldMilestonesType.getText().trim().isEmpty()
+			&& !ComboBoxMilestoneProject.getSelectionModel().getSelectedItem().toString().isEmpty()
+			&& DatePickerMilestone.getValue().toString() !=null) {
+			this.refreshComboBoxMilestone();
+				int check = dal.createMilestone(TextFieldMilestonesType.getText().trim(),
 						Integer.valueOf(ComboBoxMilestoneProject.getSelectionModel().getSelectedItem().toString()),
 						Integer.valueOf(DatePickerMilestone.getValue().toString()));
-				if(check) {
+				if(check == 1) {
 					TextAreaMilestone.setText("Milestone " + TextFieldMilestonesType.getText() + " has been assigned to project " + 
 							ComboBoxMilestoneProject.getSelectionModel().getSelectedItem().toString() + ".");	
 				}
 				else {
 					TextAreaMilestone.setText("Something went wrong when creating the project. Please try again or contact support");	
 				}
-		}
-		else {	
-			TextAreaMilestone.setText("You have run into an error. Please try again");
-		}
-	}				
+				}
+				else {	
+					TextAreaMilestone.setText("You have run into an error. Please try again");
+
+				}
+			}catch(SQLException e ) {
+					TextAreaMilestone.setText("There appears to have been a problem");
+				}
+			}				
 	
 	//----------------------------------------------------//----------------------------------------------------//----------------------------------------------------//----------------------------------------------------//
 	
