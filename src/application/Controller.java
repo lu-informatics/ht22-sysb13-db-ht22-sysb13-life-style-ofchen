@@ -1,6 +1,5 @@
 package application;
 
-
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -40,16 +39,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 
-public class Controller  {
+public class Controller {
 	DAL dal = new DAL();
 
-	
-	
-	
 //	RadioButtonConsultant.setToggleGroup(tgConsultant)
-	
+
 	// CONSULTANT
-	
+
 	@FXML
 	private TextArea consultantTextAreaInformation = new TextArea();
 	@FXML
@@ -61,28 +57,29 @@ public class Controller  {
 
 	
 	// TextField 
+
 	@FXML
 	private TextField TextFieldConsultantName = new TextField();
 	@FXML
 	private TextField TextFieldEmpID = new TextField();
 	@FXML
 	private TextField TextFieldConsultantAddress = new TextField();
-		@FXML
-	private TextField TextFieldSalary = new TextField();
-	
-	// RadioButton 
 	@FXML
-	private Button ButtonCreateEmployee = new Button();	
-	
+	private TextField TextFieldSalary = new TextField();
+
+	// RadioButton
+	@FXML
+	private Button ButtonCreateEmployee = new Button();
+
 	@FXML
 	private Button ButtonViewStaff = new Button();
 	
 	@FXML
 	private Button ConsultantViewButton = new Button();
-	
+
 	@FXML
 	private Line ConsultantLine = new Line();
-	
+
 	@FXML
 	private ComboBox ConsultantComboBox = new ComboBox();
 
@@ -91,14 +88,17 @@ public class Controller  {
 	//LOG
 	
 	//TextFields 
+
 	@FXML
 	private TextField TextFieldLogHours = new TextField();
-	
-	// ComboBoxes 
+
+	// ComboBoxes
 	@FXML
 	private ComboBox ComboBoxLogConsultants = new ComboBox();
+  
 	@FXML
 	private ComboBox ComboBoxLogProjects = new ComboBox();
+ 
 	@FXML
 	private ComboBox ComboboxLogViewTimeConsultant = new ComboBox();
 	
@@ -106,15 +106,16 @@ public class Controller  {
 	private ComboBox ComboBoxLogProjects1 = new ComboBox();
 	
 	// RunButton 
+
 	@FXML
 	private Button ButtonAssignTime = new Button();
-	
+
 	@FXML
 	private Button ButtonViewHours11 = new Button();
 	
 	@FXML
 	private TextArea TextAreaLog = new TextArea();
-	
+
 	@FXML
 	private Line LineLog = new Line();
 	
@@ -124,9 +125,10 @@ public class Controller  {
 	// ---------------------------------------------------------//// ---------------------------------------------------------//
 	
 	// PROJECT 
+
 	@FXML
 	private TextArea viewProjectInformationTextArea = new TextArea();
-	
+
 	// TextFields
 	@FXML
 	private TextField TextFieldProjectName = new TextField();
@@ -140,28 +142,28 @@ public class Controller  {
 	
 	
 	//DatePicker 
+
 	@FXML
 	private DatePicker DatePickerProject = new DatePicker();
-	
+
 	// Table Column + view
 	@FXML
 	private TableView ProjectTableView = new TableView();
-	@FXML 
+	@FXML
 	private TableColumn ProjectTableColumnName = new TableColumn();
-	@FXML 
+	@FXML
 	private TableColumn ProjectTableColumnProjectID = new TableColumn();
-	@FXML 
-	private TableColumn ProjectTableColumnHours= new TableColumn();
-		
+	@FXML
+	private TableColumn ProjectTableColumnHours = new TableColumn();
+
 	// RadioButton
-	
+
 	@FXML
 	private RadioButton RadioButtonYes = new RadioButton();
 	@FXML
 	private RadioButton RadioButtonNo = new RadioButton();
 
-	
-	//Button
+	// Button
 	@FXML
 	private Button ButtonViewProject = new Button();
 	@FXML
@@ -173,6 +175,7 @@ public class Controller  {
 	private Button ButtonViewHasWork = new Button(); 
 	
 	// ComboBoxes 
+
 	@FXML
 	private ComboBox ComboBoxProjectProjects = new ComboBox();
 	@FXML
@@ -181,25 +184,26 @@ public class Controller  {
 	private ComboBox ComboBoxProjectAdd = new ComboBox();
 	@FXML
 	private ComboBox ComboBoxViewProject = new ComboBox();
-	
+
 	@FXML
 	private ComboBox ComboBoxProjectAddConsultant = new ComboBox();
-	
-	//------------------------------------------------------------//// ---------------------------------------------------------//
-	
-	//MILESTONE
-	
-	//TextField 
+
+	// ------------------------------------------------------------////
+	// ---------------------------------------------------------//
+
+	// MILESTONE
+
+	// TextField
 	@FXML
 	private TextField TextFieldMilestonesType = new TextField();
-	
+
 	// RadioButton
 	@FXML
 	private Button RunButtonCreateMileStone = new Button();
 	@FXML
 	private Button ViewMilestone = new Button();
 
-	// ComboBoxes 
+	// ComboBoxes
 	@FXML
 	private ComboBox<String> ComboBoxMilestoneMilestone = new ComboBox();
 	
@@ -211,16 +215,17 @@ public class Controller  {
 	
 	//--------------------------------------------------------------//// ---------------------------------------------------------//
 
-	
+
+	// --------------------------------------------------------------////
+	// ---------------------------------------------------------//
+
 	// TabePane
 	@FXML
 	private TabPane tabpane = new TabPane();
-	
+
 	// All TextAreas
 	@FXML
 	private TextArea textarea = new TextArea();
-	
-	
 	@FXML
 	private TextArea TextAreaProject = new TextArea();
 	@FXML
@@ -235,14 +240,14 @@ public class Controller  {
 	private Tab TabProject = new Tab();
 	@FXML
 	private Tab TabMilestone = new Tab();
-	
-	// END OF FXML 
-	
-	//----------------------------------------------------//----------------------------------------------------//----------------------------------------------------//
-	
+
+	// END OF FXML
+
+	// ----------------------------------------------------//----------------------------------------------------//----------------------------------------------------//
+
 	// DATEPICKER METHODS
-	 public void getDateConsultant(ActionEvent event) {
-		  LocalDate myDate = DatePickerConsultant.getValue();
+	public void getDateConsultant(ActionEvent event) {
+		LocalDate myDate = DatePickerConsultant.getValue();
 	}
 	 
 	 public void getDateMilestone(ActionEvent event) {
@@ -355,14 +360,47 @@ public class Controller  {
 										"Name: " + rs.getString(2) + "\n" + "Address: " + rs.getString(3) + "\n"
 										+ "Startdate: " + rs.getString(4) + "\n" + "Salary: " + rs.getString(5));
 					}
+
 				}
-				else { consultantTextAreaInformation.setText("Something went wrong when fetching your information. Please try again");
+				else if (TextFieldSalary.getText().isEmpty()){
+					TextAreaConsultant.setText("Please Insert Salary");
 				}
-			} catch (Exception e)
-			{ consultantTextAreaInformation.setText("Something went wrong when calling the database. Please try again or contact a developer");
+
+				else{
+						
+					try {
+						
+						int a = 0 ; 
+						int b = 0 ; 
+						a = Integer.parseInt(TextFieldEmpID.getText().trim()) ;
+						b = Integer.parseInt(TextFieldSalary.getText().trim()) ;
+						
+						boolean check = dal.createEmployee("C-" + Integer.parseInt(TextFieldEmpID.getText().trim()), TextFieldConsultantName.getText().trim(), 
+								TextFieldConsultantAddress.getText().trim(), 
+								DatePickerConsultant.getValue().toString(), Integer.parseInt(TextFieldSalary.getText().trim()));
+							if(check) {
+							TextAreaConsultant.setText("The employee: " + TextFieldConsultantName.getText() + " (" + TextFieldEmpID.getText() + ") was created!" + "\n" + "Address: " + TextFieldConsultantAddress.getText() + "\n"
+								+ "Start date: " + DatePickerConsultant.getValue() + "\n" + "Salary: " + TextFieldSalary.getText()); // 
+							}
+							
+					if (b < 0) {
+						TextAreaConsultant.setText("Salary can not be less than 0");
+					}
+					
+					} catch (NumberFormatException e) {
+						
+						TextAreaConsultant.setText("Please present only digits in EmployeeID and Salary ");
+						
+						e.printStackTrace();
+						
+					} catch (SQLException e) {
+						TextAreaConsultant.setText(" ---- ");
+						e.printStackTrace();
+					}
+				}
+			} finally {
 			}
-		}	
-	// --------------------------------------------------------------------------------------------------------//----------------------------------------------------//
+			
 	
 		// view all milestone information 
 		@FXML
@@ -557,8 +595,9 @@ public class Controller  {
 	//CONSULTANTS (ALL)
 	public void refreshComboBoXConsultants() throws SQLException {
 		ObservableList<String> listConsultants = FXCollections.observableArrayList();
+
 		ResultSet result = dal.getAllConsultantEmpID();
-		while(result.next()){
+		while (result.next()) {
 			listConsultants.add(result.getString(1));
 		}
 		ComboBoxProjectConsultants.setItems(listConsultants);
@@ -587,24 +626,24 @@ public class Controller  {
 		}
 		
 	}
-	
-	
-	// MILESTONES  
+
+	// MILESTONES
 	public void refreshComboBoxMilestone() throws SQLException {
 		ObservableList<String> listMilestones = FXCollections.observableArrayList();
 		ResultSet result = dal.viewAllMilestones();
 		while(result.next()) {
+
 			listMilestones.add(result.getString(1));
 		}
 		ComboBoxMilestoneMilestone.setItems(listMilestones);
-		}
-	
-	//PROJECTS
+	}
+
+	// PROJECTS
 	public void refreshComboBoxProject() throws SQLException {
 		ObservableList<String> listProjects = FXCollections.observableArrayList();
 		ResultSet result = dal.getProject();
-		while(result.next()) {
-			listProjects.add(result.getString(1));		
+		while (result.next()) {
+			listProjects.add(result.getString(1));
 		}
 		ComboBoxProjectProjects.setItems(listProjects);
 		ComboBoxMilestoneProject.setItems(listProjects);
@@ -621,11 +660,10 @@ public class Controller  {
 	}
 	
 		
+
 	@FXML
 	private void initialize() {
-		
-		
-	
+
 		try {
 			refreshComboBoXConsultants();
 		} catch (SQLException e) {
