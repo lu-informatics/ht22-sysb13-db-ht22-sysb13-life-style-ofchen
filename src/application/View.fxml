@@ -34,7 +34,7 @@
                   </Label>
                   <TextField fx:id="TextFieldConsultantName" layoutX="78.0" layoutY="68.0" promptText="First name Last name" />
                   <TextField fx:id="TextFieldConsultantAddress" layoutX="78.0" layoutY="138.0" promptText="City/Street Name/Nbr" />
-                  <TextField fx:id="TextFieldEmpID" layoutX="78.0" layoutY="104.0" promptText="C-XXXXX" />
+                  <TextField fx:id="TextFieldEmpID" layoutX="78.0" layoutY="104.0" promptText="XXXXX" />
                   <TextField fx:id="TextFieldSalary" layoutX="78.0" layoutY="171.0" promptText="Enter salary in SEK" />
                   <Button fx:id="ButtonCreateEmployee" layoutX="77.0" layoutY="268.0" mnemonicParsing="false" onAction="#createEmployeeRunButton" prefHeight="30.0" prefWidth="130.0" text="Register Employee" textFill="#1e10e8">
                      <font>
@@ -140,7 +140,7 @@
           <AnchorPane fx:id="AnchorPaneLog" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <ComboBox fx:id="ComboBoxLogProjects" layoutX="86.0" layoutY="115.0" prefWidth="150.0" promptText="Projects" />
-                  <ComboBox fx:id="ComboBoxLogConsultants" layoutX="85.0" layoutY="62.0" prefWidth="150.0" promptText="Consultants" />
+                  <ComboBox fx:id="ComboBoxLogConsultants" layoutX="85.0" layoutY="62.0" onAction="#refreshLogProjectsComboBox" prefWidth="150.0" promptText="Consultants" />
                   <TextArea fx:id="TextAreaLog" editable="false" layoutX="14.0" layoutY="279.0" prefHeight="206.0" prefWidth="431.0" promptText="Welcome! To register amount of time worked please choose a consultant, a project and enter the amount of hours you want to register. To view time spent on a project, please chose a consultant and press &quot;View time&quot; " />
                   <Label layoutX="14.0" layoutY="66.0" text="1. Select" underline="true" />
                   <Label layoutX="14.0" layoutY="119.0" text="2. Select" underline="true" />
@@ -153,7 +153,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="ComboboxLogViewTimeConsultant" layoutX="590.0" layoutY="54.0" prefWidth="150.0" promptText="Consultants" />
+                  <ComboBox fx:id="ComboboxLogViewTimeConsultant" layoutX="590.0" layoutY="54.0" onAction="#refreshLogProjectsComboBox" prefWidth="150.0" promptText="Consultants" />
                   <Label layoutX="16.0" layoutY="227.0" text="4. Press" underline="true" />
                   <Label layoutX="535.0" layoutY="58.0" text="1. Select" underline="true" />
                   <Label layoutX="535.0" layoutY="107.0" text="2. Select" underline="true" />
