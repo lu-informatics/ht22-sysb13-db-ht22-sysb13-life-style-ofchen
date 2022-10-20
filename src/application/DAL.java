@@ -84,10 +84,12 @@ public class DAL {
 	// View all consultants and their hours on a specific project
 	public ResultSet getConsultantInfoForProject(String ProjectID, String EmpID) throws SQLException {
 		Connection connection = DriverManager.getConnection(connectionURL);
-		String query = "SELECT p.ProjectID, EmpID, hours FROM Project p JOIN Work w ON p.ProjectID= w.ProjectID WHERE p.ProjectID = '"
-				+ ProjectID + "'" + " AND w.EmpID = '" + EmpID + "'";
+		String query = "SELECT p.ProjectID, EmpID, hours\r\n"
+				+ "FROM Project p\r\n JOIN Work w ON p.ProjectID= w.ProjectID WHERE p.ProjectID = '" + ProjectID + "'"
+				+ " AND w.EmpID = '" + EmpID + "'";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ResultSet IDResultProject = ps.executeQuery();
+		System.out.print("hej");
 		return IDResultProject;
 	}
 
@@ -126,9 +128,17 @@ public class DAL {
 	// projectID (only if there are employees)
 	public ResultSet getAllProjectInformation(String ProjectID) throws SQLException {
 		Connection connection = DriverManager.getConnection(connectionURL);
-		String queryTest = "SELECT ProjectName, p.ProjectID, EmpID, hours, Budget, ProjectStartDate\r\n"
-				+ "FROM Project p\r\n" + "join Work w\r\n" + "on p.ProjectID= w.ProjectID\r\n" + "WHERE p.ProjectID = '"
+		String queryTest = "SELECT ProjectName, w.ProjectID, EmpID, hours, Budget, ProjectStartDate FROM Project p, Work w WHERE w.ProjectID = '"
 				+ ProjectID + "'";
+		PreparedStatement ps = connection.prepareStatement(queryTest);
+		ResultSet IDResultProject = ps.executeQuery();
+		return IDResultProject;
+	}
+
+	// projectID (only if there isn´t employees)
+	public ResultSet viewProject(String ProjectID) throws SQLException {
+		Connection connection = DriverManager.getConnection(connectionURL);
+		String queryTest = "SELECT * FROM Project WHERE ProjectID = '" + ProjectID + "'";
 		PreparedStatement ps = connection.prepareStatement(queryTest);
 		ResultSet IDResultProject = ps.executeQuery();
 		return IDResultProject;
@@ -138,10 +148,9 @@ public class DAL {
 
 	public ResultSet projectInfo(String ProjectID) throws SQLException {
 		Connection connection = DriverManager.getConnection(connectionURL);
-		String query = "SELECT * FROM PROJECT WHERE ProjectID = '" + ProjectID + "'";
+		String query = "SELECT ProjectID,hours FROM WORK WHERE ProjectID = '" + ProjectID + "'";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ResultSet ResultProject = ps.executeQuery();
-		System.out.print("ROWS: " + ResultProject.getRow());
 		return ResultProject;
 	}
 
@@ -224,7 +233,7 @@ public class DAL {
 	// query for finding EmpID of those who work on a project for combBox
 	public ResultSet getEmpIDWorkingConsultant() throws SQLException {
 		Connection connection = DriverManager.getConnection(connectionURL);
-		String query = "SELECT Distinct ProjectID \r\n" + "FROM WORK w, CONSULTANT c \r\n" + "WHERE w.EmpID = c.EmpID";
+		String query = "SELECT Distinct w.EmpID \r\n" + "FROM WORK w, CONSULTANT c \r\n" + "WHERE w.EmpID = c.EmpID";
 		PreparedStatement ps = connection.prepareStatement(query);
 		ResultSet IDResult = ps.executeQuery();
 		return IDResult;
