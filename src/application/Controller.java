@@ -251,7 +251,7 @@ public class Controller {
 							+ "Try again using this information!");
 				} else {
 					// if everything is entered correctly, we first create the employee in our
-					// databse
+					// database
 					int check = dal.createEmployee(TextFieldEmpID.getText().trim(),
 							TextFieldConsultantName.getText().trim(), TextFieldConsultantAddress.getText().trim(),
 							DatePickerConsultant.getValue().toString(),
