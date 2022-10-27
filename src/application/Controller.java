@@ -37,35 +37,35 @@ public class Controller {
 	@FXML
 	private TextArea consultantTextAreaInformation = new TextArea();
 	@FXML
-	private TextArea TextAreaConsultant = new TextArea();
+	private TextArea textAreaConsultant = new TextArea();
 
 	// DatePickers
 	@FXML
-	private DatePicker DatePickerConsultant = new DatePicker();
+	private DatePicker datePickerConsultant = new DatePicker();
 
 	// TextField
 	@FXML
-	private TextField TextFieldConsultantName = new TextField();
+	private TextField textFieldConsultantName = new TextField();
 	@FXML
-	private TextField TextFieldEmpID = new TextField();
+	private TextField textFieldEmpID = new TextField();
 	@FXML
-	private TextField TextFieldConsultantAddress = new TextField();
+	private TextField textFieldConsultantAddress = new TextField();
 	@FXML
-	private TextField TextFieldSalary = new TextField();
+	private TextField textFieldSalary = new TextField();
 
 	// Button
 	@FXML
-	private Button ButtonCreateEmployee = new Button();
+	private Button buttonCreateEmployee = new Button();
 
 	@FXML
-	private Button ConsultantViewButton = new Button();
+	private Button consultantViewButton = new Button();
 
 	// Line and combobox
 	@FXML
-	private Line ConsultantLine = new Line();
+	private Line consultantLine = new Line();
 
 	@FXML
-	private ComboBox<String> ConsultantComboBox = new ComboBox<String>();
+	private ComboBox<String> consultantComboBox = new ComboBox<String>();
 
 	// -------------------------------------------------------------------------------------------------------------------//
 
@@ -73,35 +73,35 @@ public class Controller {
 
 	// TextFields
 	@FXML
-	private TextField TextFieldLogHours = new TextField();
+	private TextField textFieldLogHours = new TextField();
 
 	// ComboBoxes
 	@FXML
-	private ComboBox ComboBoxLogConsultants = new ComboBox();
+	private ComboBox comboBoxLogConsultants = new ComboBox();
 	@FXML
-	private ComboBox ComboBoxLogProjects = new ComboBox();
+	private ComboBox comboBoxLogProjects = new ComboBox();
 	@FXML
-	private ComboBox ComboboxLogViewTimeConsultant = new ComboBox();
+	private ComboBox comboboxLogViewTimeConsultant = new ComboBox();
 	@FXML
-	private ComboBox ComboBoxLogProjects1 = new ComboBox();
+	private ComboBox comboBoxLogProjects1 = new ComboBox();
 
 	// RunButton
 	@FXML
-	private Button ButtonAssignTime = new Button();
+	private Button buttonAssignTime = new Button();
 
 	@FXML
-	private Button ButtonViewHours = new Button();
+	private Button buttonViewHours = new Button();
 
 	// Text Area
 	@FXML
-	private TextArea TextAreaLog = new TextArea();
+	private TextArea textAreaLog = new TextArea();
 
 	@FXML
-	private TextArea ViewTimeWorked = new TextArea();
+	private TextArea viewTimeWorked = new TextArea();
 
 	// Line
 	@FXML
-	private Line LineLog = new Line();
+	private Line lineLog = new Line();
 
 	// ------------------------------------------------------------------------------------------------------------------//
 
@@ -111,14 +111,14 @@ public class Controller {
 
 	// TextFields
 	@FXML
-	private TextField TextFieldProjectName = new TextField();
+	private TextField textFieldProjectName = new TextField();
 	@FXML
-	private TextField TextFieldProjectID = new TextField();
+	private TextField textFieldProjectID = new TextField();
 	@FXML
-	private TextField TextFieldProjectBudget = new TextField();
+	private TextField textFieldProjectBudget = new TextField();
 
 	@FXML
-	private TextField TextFieldProjectHours = new TextField();
+	private TextField textFieldProjectHours = new TextField();
 
 	// DatePicker
 	@FXML
@@ -126,41 +126,41 @@ public class Controller {
 
 	// Table Column + view
 	@FXML
-	private TableView ProjectTableView = new TableView();
+	private TableView projectTableView = new TableView();
 	@FXML
-	private TableColumn ProjectTableColumnName = new TableColumn();
+	private TableColumn projectTableColumnName = new TableColumn();
 	@FXML
-	private TableColumn ProjectTableColumnProjectID = new TableColumn();
+	private TableColumn projectTableColumnProjectID = new TableColumn();
 	@FXML
-	private TableColumn ProjectTableColumnHours = new TableColumn();
+	private TableColumn projectTableColumnHours = new TableColumn();
 
 	// RadioButton
 
 	@FXML
-	private RadioButton RadioButtonYes = new RadioButton();
+	private RadioButton radioButtonYes = new RadioButton();
 	@FXML
-	private RadioButton RadioButtonNo = new RadioButton();
+	private RadioButton radioButtonNo = new RadioButton();
 
 	// Button
 	@FXML
-	private Button ButtonViewProject = new Button();
+	private Button buttonViewProject = new Button();
 	@FXML
-	private Button ButtonCreateProject = new Button();
+	private Button buttonCreateProject = new Button();
 	@FXML
-	private Button ButtonAssignConsultant = new Button();
+	private Button buttonAssignConsultant = new Button();
 
 	@FXML
-	private Button ButtonViewHasWork = new Button();
+	private Button buttonViewHasWork = new Button();
 
 	// ComboBoxes
 	@FXML
-	private ComboBox ComboBoxProjectProjects = new ComboBox();
+	private ComboBox comboBoxProjectProjects = new ComboBox();
 	@FXML
-	private ComboBox ComboBoxProjectConsultants = new ComboBox();
+	private ComboBox comboBoxProjectConsultants = new ComboBox();
 	@FXML
-	private ComboBox ComboBoxProjectAdd = new ComboBox();
+	private ComboBox comboBoxProjectAdd = new ComboBox();
 	@FXML
-	private ComboBox ComboBoxViewProject = new ComboBox();
+	private ComboBox comboBoxViewProject = new ComboBox();
 
 	@FXML
 	private ComboBox ComboBoxProjectAddConsultant = new ComboBox();
@@ -171,23 +171,23 @@ public class Controller {
 
 	// TextField
 	@FXML
-	private TextField TextFieldMilestonesType = new TextField();
+	private TextField textFieldMilestonesType = new TextField();
 
 	// RadioButton
 	@FXML
-	private Button RunButtonCreateMileStone = new Button();
+	private Button runButtonCreateMileStone = new Button();
 	@FXML
-	private Button ViewMilestone = new Button();
+	private Button viewMilestone = new Button();
 
 	// ComboBoxes
 	@FXML
-	private ComboBox<String> ComboBoxMilestoneMilestone = new ComboBox();
+	private ComboBox<String> comboBoxMilestoneMilestone = new ComboBox();
 
 	@FXML
-	private ComboBox<String> ComboBoxMilestoneProject = new ComboBox();
+	private ComboBox<String> comboBoxMilestoneProject = new ComboBox();
 
 	@FXML
-	private DatePicker DatePickerMilestone = new DatePicker();
+	private DatePicker datePickerMilestone = new DatePicker();
 
 	// ----------------------------------------------------------------------------------------------------------------------//
 
@@ -223,15 +223,15 @@ public class Controller {
 
 	// DATEPICKER METHODS
 	public void getDateConsultant(ActionEvent event) {
-		LocalDate myDate = DatePickerConsultant.getValue();
+		LocalDate myDate = datePickerConsultant.getValue();
 	}
 
 	public void getDateMilestone(ActionEvent event) {
-		LocalDate myDate = DatePickerMilestone.getValue();
+		LocalDate myDate = datePickerMilestone.getValue();
 	}
 
 	public void getDateProject(ActionEvent event) {
-		LocalDate myDate = DatePickerMilestone.getValue();
+		LocalDate myDate = datePickerMilestone.getValue();
 	}
 
 	// ----------------------------------------------------//----------------------------------------------------//----------------------------------------------------//
@@ -241,40 +241,40 @@ public class Controller {
 	// Creating an employee
 	public void createEmployeeRunButton() throws SQLException {
 		try {
-			if (!TextFieldEmpID.getText().trim().isEmpty() && !TextFieldConsultantName.getText().isEmpty()
-					&& !TextFieldConsultantAddress.getText().isEmpty() && DatePickerConsultant.getValue() != null
-					&& !TextFieldSalary.getText().isEmpty()) {
+			if (!textFieldEmpID.getText().trim().isEmpty() && !textFieldConsultantName.getText().isEmpty()
+					&& !textFieldConsultantAddress.getText().isEmpty() && datePickerConsultant.getValue() != null
+					&& !textFieldSalary.getText().isEmpty()) {
 				// only allowing numbers for the id and setting the lenght to 10 digits
-				if (!Pattern.matches("[0-9]+", TextFieldEmpID.getText()) || TextFieldEmpID.getText().length() != 10) {
-					TextAreaConsultant.setText("Only positive 10 digit numbers are allowed as ID." + "\n"
+				if (!Pattern.matches("[0-9]+", textFieldEmpID.getText()) || textFieldEmpID.getText().length() != 10) {
+					textAreaConsultant.setText("Only positive 10 digit numbers are allowed as ID." + "\n"
 							+ " Please do not use any special charcaters like " + "-+%&" + "\n"
 							+ "Try again using this information!");
 				} else {
 					// if everything is entered correctly, we first create the employee in our
 					// database
-					int check = dal.createEmployee(TextFieldEmpID.getText().trim(),
-							TextFieldConsultantName.getText().trim(), TextFieldConsultantAddress.getText().trim(),
-							DatePickerConsultant.getValue().toString(),
-							Integer.valueOf(TextFieldSalary.getText().trim()));
+					int check = dal.createEmployee(textFieldEmpID.getText().trim(),
+							textFieldConsultantName.getText().trim(), textFieldConsultantAddress.getText().trim(),
+							datePickerConsultant.getValue().toString(),
+							Integer.valueOf(textFieldSalary.getText().trim()));
 					if (check == 1 || check == 2) {
 						// if the creation of employee (consultant) was successfull, we let the user
 						// know it was successfull
-						TextAreaConsultant.setText("The employee: " + TextFieldConsultantName.getText() + " ("
-								+ TextFieldEmpID.getText() + ") was created!" + "\n" + "Address: "
-								+ TextFieldConsultantAddress.getText() + "\n" + "Start date: "
-								+ DatePickerConsultant.getValue() + "\n" + "Salary: " + TextFieldSalary.getText());
-						TextFieldConsultantName.clear();
-						TextFieldConsultantAddress.clear();
-						TextFieldSalary.clear();
-						TextFieldEmpID.clear();
+						textAreaConsultant.setText("The employee: " + textFieldConsultantName.getText() + " ("
+								+ textFieldEmpID.getText() + ") was created!" + "\n" + "Address: "
+								+ textFieldConsultantAddress.getText() + "\n" + "Start date: "
+								+ datePickerConsultant.getValue() + "\n" + "Salary: " + textFieldSalary.getText());
+						textFieldConsultantName.clear();
+						textFieldConsultantAddress.clear();
+						textFieldSalary.clear();
+						textFieldEmpID.clear();
 						this.refreshComboBoXConsultants();
 					} else {
-						TextAreaConsultant.setText(
+						textAreaConsultant.setText(
 								"This employee ID already exists! Try entering a new one before pressing create.");
 					}
 				}
 			} else {
-				TextAreaConsultant.setText(
+				textAreaConsultant.setText(
 						"Please make sure all requiered fields have been filled in before you press 'register employee' again");
 			}
 		}
@@ -282,19 +282,19 @@ public class Controller {
 		catch (SQLServerException e) {
 			// table full error
 			if (e.getErrorCode() == 114) {
-				TextAreaConsultant.setText("The employee: " + TextFieldConsultantName.getText() + " ("
-						+ TextFieldEmpID.getText() + ") was created!" + "\n" + "Address: "
-						+ TextFieldConsultantAddress.getText() + "\n" + "Start date: " + DatePickerConsultant.getValue()
-						+ "\n" + "Salary: " + TextFieldSalary.getText());
-				TextFieldConsultantName.clear();
-				TextFieldSalary.clear();
-				TextFieldEmpID.clear();
+				textAreaConsultant.setText("The employee: " + textFieldConsultantName.getText() + " ("
+						+ textFieldEmpID.getText() + ") was created!" + "\n" + "Address: "
+						+ textFieldConsultantAddress.getText() + "\n" + "Start date: " + datePickerConsultant.getValue()
+						+ "\n" + "Salary: " + textFieldSalary.getText());
+				textFieldConsultantName.clear();
+				textFieldSalary.clear();
+				textFieldEmpID.clear();
 
 				this.refreshComboBoXConsultants();
 			}
-			TextAreaConsultant.setText("There is already an employee with that ID. Please choose a different one!");
+			textAreaConsultant.setText("There is already an employee with that ID. Please choose a different one!");
 		} catch (NumberFormatException e) {
-			TextAreaConsultant.setText("Please make sure that the amount in 'salary' is entered using numbers only");
+			textAreaConsultant.setText("Please make sure that the amount in 'salary' is entered using numbers only");
 		}
 	}
 
@@ -304,20 +304,20 @@ public class Controller {
 	@FXML
 	public void addConsultantsToProjects() throws SQLException {
 		try {
-			if (ComboBoxProjectAdd.getSelectionModel().getSelectedItem().toString() != null
+			if (comboBoxProjectAdd.getSelectionModel().getSelectedItem().toString() != null
 					&& ComboBoxProjectAddConsultant.getSelectionModel().getSelectedItem().toString() != null
 					// making sure the "yes" button is selected indicating that we want to run our
 					// method for "creating working consultants"
-					&& RadioButtonYes.isSelected()) {
+					&& radioButtonYes.isSelected()) {
 				// running method connected to our database thus creating the consultant
 				int check = dal.createWorkingConsultants(
 						ComboBoxProjectAddConsultant.getSelectionModel().getSelectedItem().toString(),
-						ComboBoxProjectAdd.getSelectionModel().getSelectedItem().toString());
+						comboBoxProjectAdd.getSelectionModel().getSelectedItem().toString());
 				if (check == 1) {
 					TextAreaProject.setText("You added employee "
 							+ ComboBoxProjectAddConsultant.getSelectionModel().getSelectedItem().toString()
 							+ " to the project with ProjectID: "
-							+ ComboBoxProjectAdd.getSelectionModel().getSelectedItem().toString() + "\n" + "\n"
+							+ comboBoxProjectAdd.getSelectionModel().getSelectedItem().toString() + "\n" + "\n"
 							+ "Current status: Active on project ");
 					// refreshing the comboboxes that store working consultants
 					this.refreshWorkingConsultants();
@@ -325,18 +325,18 @@ public class Controller {
 			} else {
 				// else here indicates that the user is wanting to assign an employee to a
 				// project for which he/she is not active on
-				if (ComboBoxProjectAdd.getSelectionModel().getSelectedItem().toString() != null
+				if (comboBoxProjectAdd.getSelectionModel().getSelectedItem().toString() != null
 						&& ComboBoxProjectAddConsultant.getSelectionModel().getSelectedItem().toString() != null
-						&& RadioButtonNo.isSelected()) {
+						&& radioButtonNo.isSelected()) {
 					// radiobuttonNo = not active
 					int check2 = dal.createNotWorkingConsultants(
 							ComboBoxProjectAddConsultant.getSelectionModel().getSelectedItem().toString(),
-							ComboBoxProjectAdd.getSelectionModel().getSelectedItem().toString());
+							comboBoxProjectAdd.getSelectionModel().getSelectedItem().toString());
 					if (check2 == 1) {
 						TextAreaProject.setText("You added employee "
 								+ ComboBoxProjectAddConsultant.getSelectionModel().getSelectedItem().toString()
 								+ " to project with projectID: "
-								+ ComboBoxProjectAdd.getSelectionModel().getSelectedItem().toString() + "\n" + "\n"
+								+ comboBoxProjectAdd.getSelectionModel().getSelectedItem().toString() + "\n" + "\n"
 								+ "Current status on project: Inactive on project");
 					}
 				}
@@ -356,9 +356,9 @@ public class Controller {
 	@FXML
 	public void viewEmployeeInformationButton() throws SQLException {
 		try {
-			if (ConsultantComboBox.getSelectionModel().getSelectedItem().toString() != "") {
+			if (consultantComboBox.getSelectionModel().getSelectedItem().toString() != "") {
 				ResultSet rs = dal.getAllConsultantInformation(
-						ConsultantComboBox.getSelectionModel().getSelectedItem().toString());
+						consultantComboBox.getSelectionModel().getSelectedItem().toString());
 				while (rs.next()) {
 					consultantTextAreaInformation.setText("Choosen consultant with the employee id (" + rs.getString(1)
 							+ " ) has the following information" + "\n" + "Name: " + rs.getString(2) + "\n"
@@ -386,11 +386,11 @@ public class Controller {
 	@FXML
 	public void viewMilestonesRunButton() throws SQLException {
 		try {
-			if (ComboBoxMilestoneMilestone.getSelectionModel().getSelectedItem().toString() == "") {
+			if (comboBoxMilestoneMilestone.getSelectionModel().getSelectedItem().toString() == "") {
 				TextAreaMilestone.appendText("Please select the milestone you want to view!");
-			} else if (ComboBoxMilestoneMilestone.getSelectionModel().getSelectedItem().toString() != "") {
+			} else if (comboBoxMilestoneMilestone.getSelectionModel().getSelectedItem().toString() != "") {
 				ResultSet MilestoneResult = dal.viewSpecificMilestones(
-						ComboBoxMilestoneMilestone.getSelectionModel().getSelectedItem().toString());
+						comboBoxMilestoneMilestone.getSelectionModel().getSelectedItem().toString());
 				while (MilestoneResult.next()) {
 					TextAreaMilestone.setText("Selected milestone (" + MilestoneResult.getString(1) + ")"
 							+ " is associated with project " + MilestoneResult.getString(2) + "." + "\n"
@@ -406,11 +406,11 @@ public class Controller {
 	// View HOURS
 	public void viewHoursRunButton() throws SQLException {
 		try {
-			if (!ComboboxLogViewTimeConsultant.getSelectionModel().getSelectedItem().toString().isEmpty()
-					&& !ComboBoxLogProjects1.getSelectionModel().getSelectedItem().toString().isEmpty()) {
+			if (!comboboxLogViewTimeConsultant.getSelectionModel().getSelectedItem().toString().isEmpty()
+					&& !comboBoxLogProjects1.getSelectionModel().getSelectedItem().toString().isEmpty()) {
 				ResultSet Result = dal.viewTimeConsultant(
-						ComboboxLogViewTimeConsultant.getSelectionModel().getSelectedItem().toString(),
-						ComboBoxLogProjects1.getSelectionModel().getSelectedItem().toString());
+						comboboxLogViewTimeConsultant.getSelectionModel().getSelectedItem().toString(),
+						comboBoxLogProjects1.getSelectionModel().getSelectedItem().toString());
 				{
 					// using the scanner method next() to view if the amount of hours worked is
 					// equal to null, if it is I want to display it as 0, else I want the string
@@ -423,17 +423,17 @@ public class Controller {
 						} else {
 							hours = Result.getString(1);
 						}
-						ViewTimeWorked.setText("Selected employee with ID (" + Result.getString(2) + " ) has worked "
+						viewTimeWorked.setText("Selected employee with ID (" + Result.getString(2) + " ) has worked "
 								+ hours + " hours on project with ID ( " + Result.getString(3) + " )");
 
 					}
 				}
 			} else {
-				ViewTimeWorked.setText(
+				viewTimeWorked.setText(
 						"Please make sure you have selected both a project and a consultant before pressing view");
 			}
 		} catch (NullPointerException e) {
-			ViewTimeWorked.setText("Please select the project and consultant of which you want to view!");
+			viewTimeWorked.setText("Please select the project and consultant of which you want to view!");
 		}
 
 	}
@@ -442,9 +442,9 @@ public class Controller {
 	@FXML
 	public void ButtonViewProject() {
 		try {
-			if (ComboBoxViewProject.getSelectionModel().getSelectedItem().toString() != "") {
+			if (comboBoxViewProject.getSelectionModel().getSelectedItem().toString() != "") {
 				ResultSet rs = dal
-						.getAllProjectInformation(ComboBoxViewProject.getSelectionModel().getSelectedItem().toString());
+						.getAllProjectInformation(comboBoxViewProject.getSelectionModel().getSelectedItem().toString());
 				HashMap<String, String> consultantWorks = new HashMap<String, String>();
 				if (rs.next()) {
 					while (rs.next()) {
@@ -474,7 +474,7 @@ public class Controller {
 					// another method calling the database for when a project does not have
 					// employees
 					ResultSet rs2 = dal
-							.viewProject(ComboBoxViewProject.getSelectionModel().getSelectedItem().toString());
+							.viewProject(comboBoxViewProject.getSelectionModel().getSelectedItem().toString());
 					while (rs2.next()) {
 						viewProjectInformationTextArea.setText("You choose project " + rs2.getString(3) + " with ID ("
 								+ rs2.getString(1) + ")" + "\n"
@@ -501,9 +501,9 @@ public class Controller {
 	@FXML
 	public void ButtonViewHasWorked() throws SQLException {
 		try {
-			if (ComboBoxViewProject.getSelectionModel().getSelectedItem().toString() != "") {
+			if (comboBoxViewProject.getSelectionModel().getSelectedItem().toString() != "") {
 				ResultSet rs = dal.getConsultantsFromHASWORK(
-						ComboBoxViewProject.getSelectionModel().getSelectedItem().toString());
+						comboBoxViewProject.getSelectionModel().getSelectedItem().toString());
 				HashMap<String, String> consultantHasWorks = new HashMap<String, String>();
 
 				while (rs.next()) {
@@ -530,30 +530,30 @@ public class Controller {
 	// creating a project
 	public void projectRunButton() throws SQLException {
 		try {
-			if (!TextFieldProjectName.getText().trim().isEmpty() && !TextFieldProjectID.getText().isEmpty()
-					&& DatePickerProject.getValue() != null && !TextFieldProjectBudget.getText().toString().isEmpty())
-				if (!Pattern.matches("[0-9]+", TextFieldProjectID.getText())
-						|| TextFieldProjectID.getText().length() != 8) {
+			if (!textFieldProjectName.getText().trim().isEmpty() && !textFieldProjectID.getText().isEmpty()
+					&& DatePickerProject.getValue() != null && !textFieldProjectBudget.getText().toString().isEmpty())
+				if (!Pattern.matches("[0-9]+", textFieldProjectID.getText())
+						|| textFieldProjectID.getText().length() != 8) {
 					TextAreaProject.setText("Make sure you have entered a eight digit ID only consisting of numbers");
 				} else {
 
-					int check = dal.createProject(TextFieldProjectID.getText(),
-							Integer.parseInt(TextFieldProjectBudget.getText()), TextFieldProjectName.getText(),
+					int check = dal.createProject(textFieldProjectID.getText(),
+							Integer.parseInt(textFieldProjectBudget.getText()), textFieldProjectName.getText(),
 							DatePickerProject.getValue().toString());
 					if (check == 1) {
 						TextAreaProject.setText("You have successfully created project "
-								+ TextFieldProjectName.getText() + " with ProjectID ( "
-								+ (TextFieldProjectID.getText() + " )" + "\n" + "Startdate: "
+								+ textFieldProjectName.getText() + " with ProjectID ( "
+								+ (textFieldProjectID.getText() + " )" + "\n" + "Startdate: "
 										+ DatePickerProject.getValue() + "\n" + "Budget: "
-										+ Integer.parseInt(TextFieldProjectBudget.getText())));
-						TextFieldProjectID.clear();
-						TextFieldProjectName.clear();
-						TextFieldProjectBudget.clear();
+										+ Integer.parseInt(textFieldProjectBudget.getText())));
+						textFieldProjectID.clear();
+						textFieldProjectName.clear();
+						textFieldProjectBudget.clear();
 						this.refreshComboBoxProject();
 
 					} else {
 						TextAreaProject.setText(
-								"The use of " + TextFieldProjectID.getText().toString() + " as ID is already in use."
+								"The use of " + textFieldProjectID.getText().toString() + " as ID is already in use."
 										+ "\n" + "Please try entering a different ProjectID and try again");
 					}
 				}
@@ -575,19 +575,19 @@ public class Controller {
 	// Creating a milestone
 	public void milestoneRunButton() throws SQLException {
 		try {
-			if (!TextFieldMilestonesType.getText().trim().isEmpty()
-					&& !ComboBoxMilestoneProject.getSelectionModel().getSelectedItem().toString().isEmpty()
-					&& DatePickerMilestone.getValue().toString() != null) {
-				if (!Pattern.matches("[a-zA-Z_]*", TextFieldMilestonesType.getText().toString())) {
+			if (!textFieldMilestonesType.getText().trim().isEmpty()
+					&& !comboBoxMilestoneProject.getSelectionModel().getSelectedItem().toString().isEmpty()
+					&& datePickerMilestone.getValue().toString() != null) {
+				if (!Pattern.matches("[a-zA-Z_]*", textFieldMilestonesType.getText().toString())) {
 					TextAreaMilestone.setText("The name of the milestone can only be entered using letters!");
 				} else {
-					int check = dal.createMilestone(TextFieldMilestonesType.getText().trim(),
-							(ComboBoxMilestoneProject.getSelectionModel().getSelectedItem().toString()),
-							(DatePickerMilestone.getValue().toString()));
+					int check = dal.createMilestone(textFieldMilestonesType.getText().trim(),
+							(comboBoxMilestoneProject.getSelectionModel().getSelectedItem().toString()),
+							(datePickerMilestone.getValue().toString()));
 					if (check == 1) {
-						TextAreaMilestone.setText("Milestone: " + TextFieldMilestonesType.getText() + "\n"
+						TextAreaMilestone.setText("Milestone: " + textFieldMilestonesType.getText() + "\n"
 								+ "has been assigned to project "
-								+ ComboBoxMilestoneProject.getSelectionModel().getSelectedItem().toString() + ".");
+								+ comboBoxMilestoneProject.getSelectionModel().getSelectedItem().toString() + ".");
 						this.refreshComboBoxMilestone();
 					}
 				}
@@ -606,30 +606,30 @@ public class Controller {
 	// Method for assigning hours
 	public void assignHoursRunButton() throws SQLException {
 		try {
-			if (!ComboBoxLogConsultants.getSelectionModel().getSelectedItem().toString().isEmpty()
-					&& !ComboBoxLogProjects.getSelectionModel().getSelectedItem().toString().isEmpty()
-					&& !TextFieldLogHours.getText().trim().isEmpty()) {
-				int check = dal.assignHours(ComboBoxLogConsultants.getSelectionModel().getSelectedItem().toString(),
-						ComboBoxLogProjects.getSelectionModel().getSelectedItem().toString(),
-						Integer.valueOf(TextFieldLogHours.getText()));
+			if (!comboBoxLogConsultants.getSelectionModel().getSelectedItem().toString().isEmpty()
+					&& !comboBoxLogProjects.getSelectionModel().getSelectedItem().toString().isEmpty()
+					&& !textFieldLogHours.getText().trim().isEmpty()) {
+				int check = dal.assignHours(comboBoxLogConsultants.getSelectionModel().getSelectedItem().toString(),
+						comboBoxLogProjects.getSelectionModel().getSelectedItem().toString(),
+						Integer.valueOf(textFieldLogHours.getText()));
 				if (check == 1) {
-					TextAreaLog.setText("You updated amount of hours for consultant with ID ("
-							+ ComboBoxLogConsultants.getSelectionModel().getSelectedItem().toString() + ")" + "\n"
-							+ " to have worked " + TextFieldLogHours.getText().toString()
+					textAreaLog.setText("You updated amount of hours for consultant with ID ("
+							+ comboBoxLogConsultants.getSelectionModel().getSelectedItem().toString() + ")" + "\n"
+							+ " to have worked " + textFieldLogHours.getText().toString()
 							+ " hours on project with ID ("
-							+ ComboBoxLogProjects.getSelectionModel().getSelectedItem().toString() + ")");
-					ComboBoxLogConsultants.setItems(null);
-					ComboBoxLogProjects.setItems(null);
-					TextFieldLogHours.clear();
+							+ comboBoxLogProjects.getSelectionModel().getSelectedItem().toString() + ")");
+					comboBoxLogConsultants.setItems(null);
+					comboBoxLogProjects.setItems(null);
+					textFieldLogHours.clear();
 				}
 			} else {
-				TextAreaLog.setText("Please enter amount of hours and try again");
+				textAreaLog.setText("Please enter amount of hours and try again");
 			}
 		} catch (SQLException e) {
-			TextAreaLog.setText(
+			textAreaLog.setText(
 					"Something went wrong when calling the database. Make sure your internet connection is valid before trying again!");
 		} catch (RuntimeException e) {
-			TextAreaLog.setText("Please make sure you have selected a project and " + "\n" + " an consultant"
+			textAreaLog.setText("Please make sure you have selected a project and " + "\n" + " an consultant"
 					+ " and used digits when entering amount of hours!");
 		}
 	}
@@ -640,28 +640,28 @@ public class Controller {
 // Left side Log
 	public void refreshLogProjectsComboBox() throws SQLException {
 		ObservableList<String> listSpecificProjects = FXCollections.observableArrayList();
-		if (ComboBoxLogConsultants.getSelectionModel().getSelectedItem() != null) {
+		if (comboBoxLogConsultants.getSelectionModel().getSelectedItem() != null) {
 			ResultSet result = dal
-					.viewSpecificProject(ComboBoxLogConsultants.getSelectionModel().getSelectedItem().toString());
+					.viewSpecificProject(comboBoxLogConsultants.getSelectionModel().getSelectedItem().toString());
 			while (result.next()) {
 				listSpecificProjects.add(result.getString(1));
 			}
-			ComboBoxLogProjects.getItems().clear();
-			ComboBoxLogProjects.setItems(listSpecificProjects);
+			comboBoxLogProjects.getItems().clear();
+			comboBoxLogProjects.setItems(listSpecificProjects);
 		}
 	}
 
 // right side Log
 	public void refreshLogProjectsViewComboBox() throws SQLException {
 		ObservableList<String> listSpecificProjects = FXCollections.observableArrayList();
-		if (ComboboxLogViewTimeConsultant.getSelectionModel().getSelectedItem() != null) {
+		if (comboboxLogViewTimeConsultant.getSelectionModel().getSelectedItem() != null) {
 			ResultSet result = dal.viewSpecificProject(
-					ComboboxLogViewTimeConsultant.getSelectionModel().getSelectedItem().toString());
+					comboboxLogViewTimeConsultant.getSelectionModel().getSelectedItem().toString());
 			while (result.next()) {
 				listSpecificProjects.add(result.getString(1));
 			}
-			ComboBoxLogProjects1.getItems().clear();
-			ComboBoxLogProjects1.setItems(listSpecificProjects);
+			comboBoxLogProjects1.getItems().clear();
+			comboBoxLogProjects1.setItems(listSpecificProjects);
 		}
 	}
 
@@ -672,7 +672,7 @@ public class Controller {
 		while (result.next()) {
 			listConsultants.add(result.getString(1));
 		}
-		ConsultantComboBox.setItems(listConsultants);
+		consultantComboBox.setItems(listConsultants);
 		ComboBoxProjectAddConsultant.setItems(listConsultants);
 	}
 
@@ -683,8 +683,8 @@ public class Controller {
 		while (IDResult.next()) {
 			listWorkingConsultants.add(IDResult.getString(1));
 		}
-		ComboBoxLogConsultants.setItems(listWorkingConsultants);
-		ComboboxLogViewTimeConsultant.setItems(listWorkingConsultants);
+		comboBoxLogConsultants.setItems(listWorkingConsultants);
+		comboboxLogViewTimeConsultant.setItems(listWorkingConsultants);
 
 	}
 
@@ -692,7 +692,7 @@ public class Controller {
 	public void refreshWorkingProjects() throws SQLException {
 		ObservableList<String> listWorkingProjects = FXCollections.observableArrayList();
 		ResultSet rs = dal.getProjectIDForSpecificConsultant(
-				ComboBoxLogConsultants.getSelectionModel().getSelectedItem().toString());
+				comboBoxLogConsultants.getSelectionModel().getSelectedItem().toString());
 		while (rs.next()) {
 			listWorkingProjects.add(rs.getString(1));
 		}
@@ -706,7 +706,7 @@ public class Controller {
 		while (result.next()) {
 			listMilestones.add(result.getString(1));
 		}
-		ComboBoxMilestoneMilestone.setItems(listMilestones);
+		comboBoxMilestoneMilestone.setItems(listMilestones);
 	}
 
 	// PROJECTS
@@ -716,9 +716,9 @@ public class Controller {
 		while (result.next()) {
 			listProjects.add(result.getString(1));
 		}
-		ComboBoxProjectAdd.setItems(listProjects);
-		ComboBoxViewProject.setItems(listProjects);
-		ComboBoxMilestoneProject.setItems(listProjects);
+		comboBoxProjectAdd.setItems(listProjects);
+		comboBoxViewProject.setItems(listProjects);
+		comboBoxMilestoneProject.setItems(listProjects);
 	}
 
 	public Controller() throws IOException {
