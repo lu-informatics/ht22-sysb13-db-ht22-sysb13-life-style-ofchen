@@ -267,7 +267,6 @@ public class Controller {
 						TextFieldConsultantAddress.clear();
 						TextFieldSalary.clear();
 						TextFieldEmpID.clear();
-
 						this.refreshComboBoXConsultants();
 					} else {
 						TextAreaConsultant.setText(
@@ -310,11 +309,11 @@ public class Controller {
 					// making sure the "yes" button is selected indicating that we want to run our
 					// method for "creating working consultants"
 					&& RadioButtonYes.isSelected()) {
-				// running method connected to our database thus creating the consultant.
+				// running method connected to our database thus creating the consultant
 				int check = dal.createWorkingConsultants(
 						ComboBoxProjectAddConsultant.getSelectionModel().getSelectedItem().toString(),
 						ComboBoxProjectAdd.getSelectionModel().getSelectedItem().toString());
-				if (check == 1 || check == 2) {
+				if (check == 1) {
 					TextAreaProject.setText("You added employee "
 							+ ComboBoxProjectAddConsultant.getSelectionModel().getSelectedItem().toString()
 							+ " to the project with ProjectID: "
@@ -333,13 +332,12 @@ public class Controller {
 					int check2 = dal.createNotWorkingConsultants(
 							ComboBoxProjectAddConsultant.getSelectionModel().getSelectedItem().toString(),
 							ComboBoxProjectAdd.getSelectionModel().getSelectedItem().toString());
-					if (check2 == 1 || check2 == 2) {
+					if (check2 == 1) {
 						TextAreaProject.setText("You added employee "
 								+ ComboBoxProjectAddConsultant.getSelectionModel().getSelectedItem().toString()
 								+ " to project with projectID: "
 								+ ComboBoxProjectAdd.getSelectionModel().getSelectedItem().toString() + "\n" + "\n"
 								+ "Current status on project: Inactive on project");
-
 					}
 				}
 			}
@@ -410,12 +408,12 @@ public class Controller {
 		try {
 			if (!ComboboxLogViewTimeConsultant.getSelectionModel().getSelectedItem().toString().isEmpty()
 					&& !ComboBoxLogProjects1.getSelectionModel().getSelectedItem().toString().isEmpty()) {
-				ResultSet Result = dal.ViewTimeConsultant(
+				ResultSet Result = dal.viewTimeConsultant(
 						ComboboxLogViewTimeConsultant.getSelectionModel().getSelectedItem().toString(),
 						ComboBoxLogProjects1.getSelectionModel().getSelectedItem().toString());
 				{
 					// using the scanner method next() to view if the amount of hours worked is
-					// equal to null, if it is I want to dispaly it as 0, else I want the string
+					// equal to null, if it is I want to display it as 0, else I want the string
 					// hours to be equal to the value of first selected column (hours) result from
 					// my dal method
 					while (Result.next()) {
@@ -542,7 +540,7 @@ public class Controller {
 					int check = dal.createProject(TextFieldProjectID.getText(),
 							Integer.parseInt(TextFieldProjectBudget.getText()), TextFieldProjectName.getText(),
 							DatePickerProject.getValue().toString());
-					if (check == 1 || check == 2) {
+					if (check == 1) {
 						TextAreaProject.setText("You have successfully created project "
 								+ TextFieldProjectName.getText() + " with ProjectID ( "
 								+ (TextFieldProjectID.getText() + " )" + "\n" + "Startdate: "
@@ -586,7 +584,7 @@ public class Controller {
 					int check = dal.createMilestone(TextFieldMilestonesType.getText().trim(),
 							(ComboBoxMilestoneProject.getSelectionModel().getSelectedItem().toString()),
 							(DatePickerMilestone.getValue().toString()));
-					if (check == 1 || check == 2) {
+					if (check == 1) {
 						TextAreaMilestone.setText("Milestone: " + TextFieldMilestonesType.getText() + "\n"
 								+ "has been assigned to project "
 								+ ComboBoxMilestoneProject.getSelectionModel().getSelectedItem().toString() + ".");
@@ -611,7 +609,7 @@ public class Controller {
 			if (!ComboBoxLogConsultants.getSelectionModel().getSelectedItem().toString().isEmpty()
 					&& !ComboBoxLogProjects.getSelectionModel().getSelectedItem().toString().isEmpty()
 					&& !TextFieldLogHours.getText().trim().isEmpty()) {
-				int check = dal.AssignHours(ComboBoxLogConsultants.getSelectionModel().getSelectedItem().toString(),
+				int check = dal.assignHours(ComboBoxLogConsultants.getSelectionModel().getSelectedItem().toString(),
 						ComboBoxLogProjects.getSelectionModel().getSelectedItem().toString(),
 						Integer.valueOf(TextFieldLogHours.getText()));
 				if (check == 1) {
